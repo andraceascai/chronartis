@@ -1,0 +1,294 @@
+.donate-page {
+  padding-bottom: var(--section-gap);
+}
+
+/* ─── Header ─────────────────────────────────────────────────────────── */
+.donate-page__header {
+  padding: 72px 0 56px;
+  max-width: 680px;
+}
+
+.donate-page__header .gold-label { margin-bottom: 4px; }
+.donate-page__header .gold-divider { margin-bottom: 20px; }
+
+.donate-page__subtitle {
+  margin-top: 20px;
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  line-height: 1.8;
+}
+
+/* ─── How It Works ───────────────────────────────────────────────────── */
+.donate-page__how {
+  padding: 56px 0;
+  border-top: 1px solid var(--surface-3);
+}
+
+.donate-page__how-title { margin-bottom: 40px; }
+
+.donate-page__steps {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+}
+
+.donate-page__step {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  padding: 28px;
+  background: var(--surface);
+  border: 1px solid var(--surface-3);
+  border-radius: var(--radius);
+  transition: border-color var(--transition);
+}
+
+.donate-page__step:hover { border-color: var(--gold-border); }
+
+.donate-page__step-num {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--gold);
+  opacity: 0.4;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.donate-page__step-title {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.donate-page__step-desc {
+  font-size: 0.86rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+/* ─── Who We Support ─────────────────────────────────────────────────── */
+.donate-page__who {
+  padding: 56px 0;
+  border-top: 1px solid var(--surface-3);
+}
+
+.donate-page__who .gold-divider { margin-bottom: 40px; }
+
+.donate-page__who-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.donate-page__who-card {
+  padding: 32px 24px;
+  background: var(--surface);
+  border: 1px solid var(--surface-3);
+  border-radius: var(--radius);
+  transition: border-color var(--transition);
+}
+
+.donate-page__who-card:hover { border-color: var(--gold-border); }
+
+.donate-page__who-icon {
+  display: block;
+  font-size: 1.3rem;
+  color: var(--gold);
+  margin-bottom: 16px;
+}
+
+.donate-page__who-title {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+
+.donate-page__who-desc {
+  font-size: 0.84rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+/* ─── Form Section ───────────────────────────────────────────────────── */
+.donate-page__form-section {
+  padding: 56px 0;
+  border-top: 1px solid var(--surface-3);
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 80px;
+  align-items: start;
+}
+
+.donate-page__form-intro .gold-label { margin-bottom: 4px; }
+.donate-page__form-intro .gold-divider { margin-bottom: 20px; }
+
+.donate-page__form-note {
+  margin-top: 20px;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.8;
+}
+
+/* ─── Form ───────────────────────────────────────────────────────────── */
+.donate-page__form {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* ─── Toggle ─────────────────────────────────────────────────────────── */
+.donate-page__toggle {
+  display: flex;
+  border: 1px solid var(--surface-3);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.donate-page__toggle-btn {
+  flex: 1;
+  padding: 13px 16px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  background: var(--surface);
+  transition: background var(--transition), color var(--transition);
+  border-right: 1px solid var(--surface-3);
+}
+
+.donate-page__toggle-btn:last-child { border-right: none; }
+
+.donate-page__toggle-btn--active {
+  color: var(--gold);
+  background: var(--gold-dim);
+}
+
+/* ─── Fields ─────────────────────────────────────────────────────────── */
+.donate-page__form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.donate-page__field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.donate-page__field--full {
+  grid-column: 1 / -1;
+}
+
+.donate-page__label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.donate-page__input {
+  width: 100%;
+  padding: 12px 16px;
+  background: var(--surface);
+  border: 1px solid var(--surface-3);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  transition: border-color var(--transition);
+  outline: none;
+}
+
+.donate-page__input::placeholder { color: var(--text-subtle); }
+
+.donate-page__input:focus {
+  border-color: var(--gold-border);
+}
+
+.donate-page__select {
+  appearance: none;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23c9a84c' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 36px;
+}
+
+.donate-page__select option { background: var(--surface-2); }
+
+.donate-page__textarea { resize: vertical; min-height: 120px; }
+
+/* ─── Form Footer ────────────────────────────────────────────────────── */
+.donate-page__form-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.donate-page__privacy {
+  font-size: 0.75rem;
+  color: var(--text-subtle);
+  max-width: 400px;
+  line-height: 1.6;
+}
+
+.donate-page__submit { padding: 12px 36px; }
+
+/* ─── Success ────────────────────────────────────────────────────────── */
+.donate-page__success {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 48px;
+  background: var(--surface);
+  border: 1px solid var(--gold-border);
+  border-radius: var(--radius);
+}
+
+.donate-page__success-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  font-size: 1.2rem;
+  border-radius: 50%;
+  border: 1px solid var(--gold-border);
+  color: var(--gold);
+}
+
+.donate-page__success h3 {
+  font-family: var(--font-serif);
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.donate-page__success p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+/* ─── Responsive ─────────────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .donate-page__form-section {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .donate-page__steps { grid-template-columns: 1fr; }
+  .donate-page__who-grid { grid-template-columns: 1fr; }
+  .donate-page__form-grid { grid-template-columns: 1fr; }
+}

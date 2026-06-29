@@ -1,0 +1,25 @@
+.upcoming-shows {
+  padding-bottom: var(--section-gap);
+}
+
+.upcoming-shows__header {
+  padding: 72px 0 56px;
+  display: flex;
+  flex-direction: column;
+}
+
+.upcoming-shows__header .gold-label { margin-bottom: 4px; }
+.upcoming-shows__header .gold-divider { margin-bottom: 20px; }
+
+.upcoming-shows__subtitle {
+  margin-top: 16px;
+  font-size: 1rem;
+  color: var(--text-muted);
+  max-width: 480px;
+}
+
+.upcoming-shows__list {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}

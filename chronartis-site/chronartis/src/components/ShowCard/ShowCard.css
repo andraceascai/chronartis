@@ -1,0 +1,94 @@
+.show-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+  cursor: pointer;
+}
+
+.show-card:hover {
+  border-color: var(--gold-border);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), 0 0 0 1px var(--gold-border);
+}
+
+/* ─── Image ──────────────────────────────────────────────────────────── */
+.show-card__image-wrap {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+}
+
+.show-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.show-card:hover .show-card__image {
+  transform: scale(1.04);
+}
+
+.show-card__category {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 3px 10px;
+  background: rgba(8, 8, 8, 0.75);
+  border: 1px solid var(--gold-border);
+  border-radius: 2px;
+  backdrop-filter: blur(4px);
+}
+
+/* ─── Body ───────────────────────────────────────────────────────────── */
+.show-card__body {
+  padding: 20px 22px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.show-card__title {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: var(--text);
+  letter-spacing: 0.01em;
+  line-height: 1.3;
+  transition: color var(--transition);
+}
+
+.show-card:hover .show-card__title { color: var(--gold-light); }
+
+.show-card__meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+.show-card__dot { color: var(--gold); opacity: 0.6; }
+
+.show-card__cta {
+  margin-top: 8px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity var(--transition), transform var(--transition);
+}
+
+.show-card:hover .show-card__cta {
+  opacity: 1;
+  transform: translateX(0);
+}
