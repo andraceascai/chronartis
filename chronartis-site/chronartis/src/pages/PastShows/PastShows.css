@@ -16,7 +16,8 @@
 .past-shows__subtitle {
   margin-top: 16px;
   font-size: 1rem;
-  color: var(--text-muted);
+  color: var(--text-body);
+  text-shadow: var(--text-shadow-bg);
   max-width: 560px;
 }
 
@@ -36,16 +37,16 @@
   font-weight: 500;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--text-muted);
-  border: 1px solid var(--surface-3);
+  color: var(--text-body);
+  border: 1px solid rgba(240, 236, 228, 0.35);
   border-radius: 2px;
-  background: transparent;
+  background: rgba(8, 8, 8, 0.45);
   transition: color var(--transition), border-color var(--transition), background var(--transition);
 }
 
 .past-shows__filter-btn:hover {
   color: var(--text);
-  border-color: var(--gold-border);
+  border-color: var(--gold);
 }
 
 .past-shows__filter-btn--active {
@@ -63,7 +64,8 @@
 
 .past-shows__empty {
   text-align: center;
-  color: var(--text-muted);
+  color: var(--text-body);
+  text-shadow: var(--text-shadow-bg);
   padding: 64px 0;
   font-size: 0.9rem;
 }
@@ -74,7 +76,8 @@
   border-top: 1px solid var(--surface-3);
   text-align: center;
   font-size: 0.78rem;
-  color: var(--text-subtle);
+  color: var(--text-muted);
+  text-shadow: var(--text-shadow-bg);
   letter-spacing: 0.05em;
 }
 

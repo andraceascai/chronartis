@@ -15,6 +15,10 @@
   --text-muted:    #9a9590;
   --text-subtle:   #555555;
 
+  /* Text scris direct pe imaginea de fundal (nu în chenare): mai deschis + umbră discretă */
+  --text-body:     #d3cec5;
+  --text-shadow-bg: 0 1px 2px rgba(0, 0, 0, 0.6), 0 0 14px rgba(0, 0, 0, 0.55);
+
   --font-serif:    'Playfair Display', Georgia, serif;
   --font-sans:     'Raleway', system-ui, sans-serif;
 
@@ -128,7 +132,8 @@ ul, ol { list-style: none; }
   align-items: center;
   gap: 8px;
   padding: 10px 26px;
-  border: 1px solid var(--gold-border);
+  border: 1px solid var(--gold);
+  background: rgba(8, 8, 8, 0.4);
   color: var(--gold);
   font-size: 0.72rem;
   font-weight: 600;

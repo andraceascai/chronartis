@@ -84,7 +84,8 @@
 /* ─── Content ────────────────────────────────────────────────────────── */
 .show-detail__description {
   font-size: 1.02rem;
-  color: var(--text-muted);
+  color: var(--text-body);
+  text-shadow: var(--text-shadow-bg);
   line-height: 1.9;
 }
 

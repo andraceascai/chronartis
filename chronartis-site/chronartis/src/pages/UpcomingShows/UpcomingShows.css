@@ -14,7 +14,8 @@
 .upcoming-shows__subtitle {
   margin-top: 16px;
   font-size: 1rem;
-  color: var(--text-muted);
+  color: var(--text-body);
+  text-shadow: var(--text-shadow-bg);
   max-width: 480px;
 }
 

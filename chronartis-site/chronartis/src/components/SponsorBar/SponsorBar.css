@@ -14,32 +14,37 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  gap: 40px 56px;
+  gap: 24px;
   margin-top: 40px;
 }
 
+/* Fiecare sponsor are aceeași căsuță; sigla e centrată în ea (dimensionată din SponsorBar.tsx). */
 .sponsor-bar__item {
+  --logo-scale: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  opacity: 0.45;
-  filter: grayscale(1) brightness(1.4);
-  transition: opacity var(--transition), filter var(--transition), transform var(--transition);
+  width: calc(210px * var(--logo-scale));
+  height: calc(72px * var(--logo-scale));
+  opacity: 0.55;
+  transition: opacity var(--transition), transform var(--transition);
 }
 
 .sponsor-bar__item:hover {
   opacity: 1;
-  filter: grayscale(0) brightness(1);
   transform: translateY(-2px);
 }
 
+/* Siglele sunt albe pe fundal transparent (public/sponsors), deci se potrivesc cu tema închisă. */
 .sponsor-bar__logo {
-  height: 44px;
-  width: auto;
+  width: calc(var(--logo-w, 100%) * var(--logo-scale));
+  height: calc(var(--logo-h, 100%) * var(--logo-scale));
+  max-width: 100%;
+  max-height: 100%;
   object-fit: contain;
 }
 
 @media (max-width: 600px) {
-  .sponsor-bar__grid { gap: 28px 36px; }
-  .sponsor-bar__logo { height: 36px; }
+  .sponsor-bar__grid { gap: 16px 12px; }
+  .sponsor-bar__item { --logo-scale: 0.75; }
 }

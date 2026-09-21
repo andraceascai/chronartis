@@ -1,66 +1,135 @@
-import { useState } from 'react';
-import Navbar from '../../components/Navbar/Navbar';
-import './DonateTickets.css';
-
-type FormType = 'donate' | 'request';
-
-interface FormState {
-  type: FormType;
-  name: string;
-  email: string;
-  phone: string;
-  message: string;
-  ticketCount: string;
-  showPreference: string;
-}
-
-const INITIAL: FormState = {
-  type: 'donate',
-  name: '',
-  email: '',
-  phone: '',
-  message: '',
-  ticketCount: '1',
-  showPreference: '',
-};
+import { useEffect, useRef, useState } from "react";
+import { useLocation } from "react-router-dom";
+import Navbar from "../../components/Navbar/Navbar";
+import "./DonateTickets.css";
 
 export default function DonateTickets() {
-  const [form, setForm]     = useState<FormState>(INITIAL);
-  const [submitted, setSubmitted] = useState(false);
+  const { hash } = useLocation();
 
-  const set = (field: keyof FormState) =>
-    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
-      setForm(prev => ({ ...prev, [field]: e.target.value }));
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setSubmitted(true);
-  };
+  // Ajunge la secțiune când pagina e deschisă direct cu #ancoră (ex. din Acasă).
+  useEffect(() => {
+    if (hash) document.getElementById(hash.slice(1))?.scrollIntoView();
+  }, [hash]);
 
   return (
     <>
       <Navbar />
       <main className="page-wrapper donate-page">
         <div className="container">
-
           {/* ─── Header ────────────────────────────────────────────── */}
           <header className="donate-page__header">
             <p className="gold-label">Inițiativă Comunitară</p>
             <div className="gold-divider" />
             <h1 className="page-title">Bilete pentru Toți</h1>
             <p className="donate-page__subtitle">
-              Arta aparține tuturor. Programul nostru de donare a biletelor conectează mecena generoși
-              cu cei care altfel nu ar putea asista la un spectacol live.
+              Arta aparține tuturor. Programul nostru de donare a biletelor
+              conectează oameni generoși cu cei care altfel nu ar putea asista
+              la un spectacol live.
             </p>
+            <div className="donate-page__header-actions">
+              <a href="#redirectionare" className="btn-gold btn-gold-filled">
+                Redirecționează 3,5%
+              </a>
+              <a href="#implica-te" className="btn-gold">
+                Donează bilete
+              </a>
+            </div>
           </header>
+
+          {/* ─── Program ───────────────────────────────────────────── */}
+          <section className="donate-page__program">
+            <div className="donate-page__program-head">
+              <p className="gold-label">Programul Național</p>
+              <div className="gold-divider" />
+              <h2 className="section-title">“Primul meu spectacol”</h2>
+              <p className="donate-page__program-lead">
+                Nu vorbim despre teorie. Vorbim despre prima întâlnire reală cu
+                arta.
+              </p>
+            </div>
+            <div className="donate-page__program-body">
+              <p>
+                “Primul meu spectacol” este un program național dezvoltat de
+                Chronartis împreună cu Marius Manole, construit ca un răspuns
+                concret la o realitate simplă: mii de tineri din România nu au
+                avut niciodată acces la un spectacol într-o sală importantă.
+              </p>
+              <p>
+                Vorbim despre momentul în care un licean intră pentru prima dată
+                în Sala Palatului și descoperă, prin spectacole de teatru și
+                concerte simfonice, ce înseamnă un act artistic de nivel înalt.
+                În primul an de activitate, proiectele Chronartis au adus
+                împreună peste 15.000 de spectatori și au facilitat participarea
+                a peste 4.500 de liceeni și tineri din medii vulnerabile. Pentru
+                mulți dintre ei, a fost prima experiență culturală din viață.
+              </p>
+              <p>
+                Programul funcționează simplu și transparent: companiile
+                achiziționează bilete, iar noi le direcționăm către licee din
+                București și din județele limitrofe, precum și către tineri care
+                nu ar avea altfel această șansă. Fiecare bilet donat înseamnă un
+                loc ocupat de un tânăr care descoperă pentru prima dată cultura
+                în mod direct.
+              </p>
+            </div>
+
+            <div className="donate-page__goals">
+              <div className="donate-page__goal">
+                <p className="gold-label">Obiectiv 2026</p>
+                <p className="donate-page__goal-value">3.000</p>
+                <p className="donate-page__goal-desc">
+                  de tineri invitați la primul lor spectacol, în cadrul unor
+                  producții de anvergură organizate la Sala Palatului, teatre și
+                  săli de concerte.
+                </p>
+              </div>
+              <div className="donate-page__goal">
+                <p className="gold-label">Extindere națională</p>
+                <p className="donate-page__goal-value">
+                  Iași · Cluj · Timișoara
+                </p>
+                <p className="donate-page__goal-desc">
+                  Vom aduce în sală adolescenți din medii vulnerabile,
+                  oferindu-le aceeași primă întâlnire esențială cu arta și
+                  experiența spectacolului.
+                </p>
+              </div>
+            </div>
+
+            <div className="donate-page__partners">
+              <p className="gold-label">Parteneri care susțin programul</p>
+              <ul className="donate-page__partners-list">
+                {PARTNERS.map((name) => (
+                  <li key={name}>{name}</li>
+                ))}
+              </ul>
+              <p className="donate-page__partners-text">
+                Sunt companii care au înțeles că impactul real nu se măsoară în
+                declarații, ci în acces oferit. Implicarea în program nu este
+                doar o asociere de imagine. Este o intervenție directă, vizibilă
+                și verificabilă în educația culturală a unei generații.
+              </p>
+              <blockquote className="donate-page__quote">
+                Chronartis construiește acest program ca o punte între mediul
+                privat și o nevoie reală din societate. “Primul meu spectacol”
+                nu este un proiect simbolic. Este un mecanism concret prin care
+                putem schimba, pas cu pas, relația unei generații față de
+                cultură.
+              </blockquote>
+            </div>
+          </section>
 
           {/* ─── How It Works ──────────────────────────────────────── */}
           <section className="donate-page__how">
-            <h2 className="section-title donate-page__how-title">Cum Funcționează</h2>
+            <h2 className="section-title donate-page__how-title">
+              Cum Funcționează
+            </h2>
             <div className="donate-page__steps">
               {STEPS.map((step, idx) => (
                 <div key={step.title} className="donate-page__step">
-                  <span className="donate-page__step-num">{String(idx + 1).padStart(2, '0')}</span>
+                  <span className="donate-page__step-num">
+                    {String(idx + 1).padStart(2, "0")}
+                  </span>
                   <div>
                     <h3 className="donate-page__step-title">{step.title}</h3>
                     <p className="donate-page__step-desc">{step.description}</p>
@@ -75,9 +144,11 @@ export default function DonateTickets() {
             <h2 className="section-title">Pe Cine Sprijinim</h2>
             <div className="gold-divider" />
             <div className="donate-page__who-grid">
-              {BENEFICIARIES.map(b => (
+              {BENEFICIARIES.map((b) => (
                 <div key={b.title} className="donate-page__who-card">
-                  <span className="donate-page__who-icon" aria-hidden="true">{b.icon}</span>
+                  <span className="donate-page__who-icon" aria-hidden="true">
+                    {b.icon}
+                  </span>
                   <h3 className="donate-page__who-title">{b.title}</h3>
                   <p className="donate-page__who-desc">{b.description}</p>
                 </div>
@@ -85,147 +156,129 @@ export default function DonateTickets() {
             </div>
           </section>
 
+          {/* ─── Impact ────────────────────────────────────────────── */}
+          <section className="donate-page__impact">
+            <h2 className="section-title">Impactul Nostru</h2>
+            <div className="gold-divider" />
+            <p className="donate-page__impact-intro">
+              Datorită celor care aleg să doneze, mii de oameni au trăit deja
+              magia unui spectacol live.
+            </p>
+            <div className="donate-page__impact-grid">
+              {IMPACT_STATS.map((stat) => (
+                <div key={stat.label} className="donate-page__stat">
+                  <p className="donate-page__stat-value">
+                    <CountUp target={stat.value} />+
+                  </p>
+                  <p className="donate-page__stat-label">{stat.label}</p>
+                  {stat.growing && (
+                    <span className="donate-page__stat-badge">în creștere</span>
+                  )}
+                </div>
+              ))}
+            </div>
+          </section>
+
           {/* ─── Form ──────────────────────────────────────────────── */}
-          <section className="donate-page__form-section">
+          <section id="implica-te" className="donate-page__form-section">
             <div className="donate-page__form-intro">
               <p className="gold-label">Implică-te</p>
               <div className="gold-divider" />
-              <h2 className="section-title">Participă la Program</h2>
+              <h2 className="section-title">
+                Participă la Programul “Primul meu spectacol”
+              </h2>
               <p className="donate-page__form-note">
-                Indiferent dacă ai bilete de donat sau dorești să soliciți bilete, completează
-                formularul de mai jos, iar echipa noastră te va contacta în termen de 48 de ore.
+                Fie că ai bilete pe care dorești să le donezi, fie că ești
+                cineva (sau cunoști pe cineva) care ar avea nevoie de un bilet,
+                ne poți scrie oricând. Fiecare gest contează, iar noi ne ocupăm
+                de restul.
               </p>
             </div>
 
-            {submitted ? (
-              <div className="donate-page__success">
-                <span className="donate-page__success-icon" aria-hidden="true">✓</span>
-                <h3>Îți mulțumim că ne-ai contactat</h3>
-                <p>Am primit mesajul tău și te vom contacta la {form.email} în termen de 48 de ore.</p>
-                <button className="btn-gold" onClick={() => { setForm(INITIAL); setSubmitted(false); }}>
-                  Trimite o altă cerere
-                </button>
-              </div>
-            ) : (
-              <form className="donate-page__form" onSubmit={handleSubmit} noValidate>
-
-                {/* ─ Type Toggle ─ */}
-                <div className="donate-page__toggle" role="group" aria-label="Form type">
-                  <button
-                    type="button"
-                    className={`donate-page__toggle-btn ${form.type === 'donate' ? 'donate-page__toggle-btn--active' : ''}`}
-                    onClick={() => setForm(prev => ({ ...prev, type: 'donate' }))}
-                  >
-                    Vreau să donez bilete
-                  </button>
-                  <button
-                    type="button"
-                    className={`donate-page__toggle-btn ${form.type === 'request' ? 'donate-page__toggle-btn--active' : ''}`}
-                    onClick={() => setForm(prev => ({ ...prev, type: 'request' }))}
-                  >
-                    Aș dori să solicit bilete
-                  </button>
-                </div>
-
-                <div className="donate-page__form-grid">
-                  <div className="donate-page__field">
-                    <label htmlFor="name" className="donate-page__label">Nume complet *</label>
-                    <input
-                      id="name"
-                      type="text"
-                      className="donate-page__input"
-                      value={form.name}
-                      onChange={set('name')}
-                      required
-                      placeholder="Numele tău"
-                    />
-                  </div>
-
-                  <div className="donate-page__field">
-                    <label htmlFor="email" className="donate-page__label">Adresă de email *</label>
-                    <input
-                      id="email"
-                      type="email"
-                      className="donate-page__input"
-                      value={form.email}
-                      onChange={set('email')}
-                      required
-                      placeholder="your@email.com"
-                    />
-                  </div>
-
-                  <div className="donate-page__field">
-                    <label htmlFor="phone" className="donate-page__label">Telefon (opțional)</label>
-                    <input
-                      id="phone"
-                      type="tel"
-                      className="donate-page__input"
-                      value={form.phone}
-                      onChange={set('phone')}
-                      placeholder="+40 7xx xxx xxx"
-                    />
-                  </div>
-
-                  <div className="donate-page__field">
-                    <label htmlFor="ticketCount" className="donate-page__label">Număr de bilete</label>
-                    <select
-                      id="ticketCount"
-                      className="donate-page__input donate-page__select"
-                      value={form.ticketCount}
-                      onChange={set('ticketCount')}
-                    >
-                      {['1', '2', '3', '4', '5+'].map(n => (
-                        <option key={n} value={n}>{n}</option>
-                      ))}
-                    </select>
-                  </div>
-
-                  {form.type === 'donate' && (
-                    <div className="donate-page__field donate-page__field--full">
-                      <label htmlFor="showPreference" className="donate-page__label">Spectacol / Eveniment</label>
-                      <input
-                        id="showPreference"
-                        type="text"
-                        className="donate-page__input"
-                        value={form.showPreference}
-                        onChange={set('showPreference')}
-                        placeholder="Pentru ce spectacol sunt biletele?"
-                      />
-                    </div>
-                  )}
-
-                  <div className="donate-page__field donate-page__field--full">
-                    <label htmlFor="message" className="donate-page__label">
-                      {form.type === 'donate' ? 'Observații suplimentare' : 'Spune-ne despre tine'}
-                    </label>
-                    <textarea
-                      id="message"
-                      className="donate-page__input donate-page__textarea"
-                      value={form.message}
-                      onChange={set('message')}
-                      rows={5}
-                      placeholder={
-                        form.type === 'donate'
-                          ? 'Orice informații suplimentare despre bilete...'
-                          : 'Te rugăm să ne spui câteva cuvinte despre situația ta pentru a te putea ajuta cât mai bine.'
-                      }
-                    />
-                  </div>
-                </div>
-
-                <div className="donate-page__form-footer">
-                  <p className="donate-page__privacy">
-                    Informațiile tale sunt utilizate exclusiv pentru coordonarea programului de bilete și nu vor fi niciodată împărtășite cu terțe părți.
-                  </p>
-                  <button type="submit" className="btn-gold btn-gold-filled donate-page__submit">
-                    Trimite
-                  </button>
-                </div>
-
-              </form>
-            )}
+            <div className="donate-page__contact">
+              <p className="donate-page__contact-text">
+                Vrei să te implici? Scrie-ne un e-mail și te vom contacta cât
+                mai curând, pentru a stabili împreună cei mai buni pași.
+              </p>
+              <a
+                className="donate-page__contact-link"
+                href={`mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(
+                  "Primul meu spectacol",
+                )}`}
+              >
+                {CONTACT_EMAIL}
+              </a>
+              <p className="donate-page__privacy">
+                Informațiile tale sunt utilizate exclusiv pentru coordonarea
+                programului de bilete și nu vor fi niciodată împărtășite cu
+                terțe părți.
+              </p>
+            </div>
           </section>
 
+          {/* ─── Tax Redirect (3,5%) ───────────────────────────────── */}
+          <section id="redirectionare" className="donate-page__tax">
+            <div className="donate-page__tax-text">
+              <div className="donate-page__tax-head">
+                <p className="gold-label">Susține Chronartis</p>
+                <div className="gold-divider" />
+                <h2 className="section-title">
+                  Redirecționează 3,5% din impozit
+                </h2>
+              </div>
+              <p className="donate-page__tax-lead">
+                În fiecare an, există acel 3,5% din impozit care poate merge
+                către o cauză în care credem.
+              </p>
+              <p>
+                Pentru mulți, pare un gest mic. Pentru un copil care ajunge
+                pentru prima dată într-o sală de teatru sau la un concert, poate
+                însemna începutul unei întâlniri cu lumea altfel decât o
+                cunoaște. Iar asta am trăit deja.
+              </p>
+              <p>
+                Prin proiecte precum “Primul meu spectacol”, am reușit să aducem
+                mii de copii și adolescenți către teatru și muzică. Iar
+                continuarea acestor inițiative depinde și de sprijinul oamenilor
+                care cred că accesul la cultură nu ar trebui să fie un
+                privilegiu.
+              </p>
+
+              <div className="donate-page__share">
+                <h3 className="donate-page__share-title">
+                  Fă cunoscută inițiativa
+                </h3>
+                <p>
+                  Dacă știți persoane care nu și-au redirecționat încă cei 3,5%
+                  din impozit către o asociație sau fundație, ne-ar ajuta enorm
+                  să le vorbiți despre Asociația Chronartis și despre programele
+                  noastre. Dacă puteți, distribuiți mai departe linkul nostru
+                  către prieteni, colegi sau familie. Uneori, un simplu mesaj
+                  trimis mai departe poate însemna încă un copil care descoperă
+                  că există și alte drumuri.
+                </p>
+                <CopyLinkButton url={TAX_FORM_URL} />
+              </div>
+            </div>
+
+            <aside className="donate-page__tax-panel">
+              <p className="donate-page__tax-figure">3,5%</p>
+              <p className="donate-page__tax-caption">
+                din impozitul pe venit, direcționat către Asociația Chronartis
+              </p>
+              <a
+                href={TAX_FORM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-gold btn-gold-filled donate-page__tax-cta"
+              >
+                Completează Formularul 230
+              </a>
+              <p className="donate-page__tax-hint">
+                Formularul se completează online, pe formular230.ro
+              </p>
+            </aside>
+          </section>
         </div>
       </main>
 
@@ -236,6 +289,92 @@ export default function DonateTickets() {
       </footer>
     </>
   );
+}
+
+const CONTACT_EMAIL = "balancristian@chronartis.com";
+const TAX_FORM_URL = "https://formular230.ro/asociatia-chronartis";
+
+const PARTNERS = [
+  "Exim Banca Românească",
+  "Bookzone",
+  "Cărturești",
+  "Adina Buzatu",
+  "Stay Coffee & Bar",
+] as const;
+
+function CopyLinkButton({ url }: { url: string }) {
+  const [copied, setCopied] = useState(false);
+
+  const copy = async () => {
+    try {
+      await navigator.clipboard.writeText(url);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2500);
+    } catch {
+      window.prompt("Copiază linkul:", url);
+    }
+  };
+
+  return (
+    <button type="button" className="btn-gold" onClick={copy}>
+      {copied ? "Link copiat ✓" : "Copiază linkul"}
+    </button>
+  );
+}
+
+// Actualizează aici cifrele pe măsură ce programul crește.
+const IMPACT_STATS = [
+  { label: "Vârstnici", value: 500, growing: false },
+  { label: "Tineri", value: 4500, growing: true },
+  { label: "Persoane cu dizabilități", value: 100, growing: false },
+] as const;
+
+const formatNumber = (n: number) =>
+  String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+
+// Numără de la 0 la `target` când elementul devine vizibil.
+function CountUp({
+  target,
+  duration = 1600,
+}: {
+  target: number;
+  duration?: number;
+}) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const [value, setValue] = useState(target);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || window.matchMedia("(prefers-reduced-motion: reduce)").matches)
+      return;
+
+    let frame = 0;
+    setValue(0);
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        observer.disconnect();
+        const start = performance.now();
+        const tick = (now: number) => {
+          const progress = Math.min((now - start) / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          setValue(Math.round(target * eased));
+          if (progress < 1) frame = requestAnimationFrame(tick);
+        };
+        frame = requestAnimationFrame(tick);
+      },
+      { threshold: 0.4 },
+    );
+
+    observer.observe(el);
+    return () => {
+      observer.disconnect();
+      cancelAnimationFrame(frame);
+    };
+  }, [target, duration]);
+
+  return <span ref={ref}>{formatNumber(value)}</span>;
 }
 
 const STEPS = [

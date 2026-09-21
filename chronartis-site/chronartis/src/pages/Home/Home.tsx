@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
 import SponsorBar from "../../components/SponsorBar/SponsorBar";
 import { socialLinks, sponsors } from "../../data/mockData";
@@ -120,6 +121,32 @@ export default function Home() {
                 <p className="about__pillar-desc">{p.description}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── Support (3,5%) ───────────────────────────────────────── */}
+      <section className="support">
+        <div className="container">
+          <div className="support__card">
+            <div className="support__text">
+              <p className="gold-label">Susține Chronartis</p>
+              <div className="gold-divider" />
+              <h2 className="section-title support__title">
+                3,5% din impozit pot deveni prima ta întâlnire cu arta
+              </h2>
+              <p className="support__desc">
+                Redirecționează 3,5% din impozitul pe venit către Asociația
+                Chronartis și ajută tinerii să descopere, pentru prima dată,
+                magia unui spectacol live.
+              </p>
+            </div>
+            <Link
+              to="/donate#redirectionare"
+              className="btn-gold btn-gold-filled support__cta"
+            >
+              Redirecționează 3,5%
+            </Link>
           </div>
         </div>
       </section>

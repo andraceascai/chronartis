@@ -14,8 +14,136 @@
 .donate-page__subtitle {
   margin-top: 20px;
   font-size: 1.05rem;
+  color: var(--text-body);
+  text-shadow: var(--text-shadow-bg);
+  line-height: 1.8;
+}
+
+.donate-page__header-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 32px;
+}
+
+/* Ancorele nu trebuie să rămână sub navbar */
+.donate-page section[id] { scroll-margin-top: calc(var(--nav-height) + 16px); }
+
+/* ─── Program ────────────────────────────────────────────────────────── */
+.donate-page__program {
+  padding: 56px 0;
+  border-top: 1px solid var(--surface-3);
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 40px 80px;
+  align-items: start;
+}
+
+.donate-page__program-head .gold-label { margin-bottom: 4px; }
+.donate-page__program-head .gold-divider { margin-bottom: 20px; }
+
+.donate-page__program-lead {
+  margin-top: 20px;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.15rem;
+  line-height: 1.6;
+  color: var(--gold-light);
+}
+
+.donate-page__program-body,
+.donate-page__tax-text {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  font-size: 0.95rem;
   color: var(--text-muted);
   line-height: 1.8;
+}
+
+/* Paragrafele din program stau direct pe fundalul site-ului (cele din cardul 3,5% sunt într-un chenar) */
+.donate-page__program-body {
+  color: var(--text-body);
+  text-shadow: var(--text-shadow-bg);
+}
+
+.donate-page__goals {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.donate-page__goal {
+  padding: 32px 28px;
+  background: var(--surface);
+  border: 1px solid var(--surface-3);
+  border-radius: var(--radius);
+  transition: border-color var(--transition);
+}
+
+.donate-page__goal:hover { border-color: var(--gold-border); }
+
+.donate-page__goal-value {
+  margin: 12px 0;
+  font-family: var(--font-serif);
+  font-size: clamp(1.6rem, 3.4vw, 2.4rem);
+  font-weight: 600;
+  line-height: 1.15;
+  color: var(--text);
+}
+
+.donate-page__goal-desc {
+  font-size: 0.84rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+.donate-page__partners {
+  grid-column: 1 / -1;
+  padding: 32px 28px;
+  background: var(--surface);
+  border: 1px solid var(--surface-3);
+  border-radius: var(--radius);
+}
+
+.donate-page__partners-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 0;
+  margin: 16px 0 20px;
+}
+
+.donate-page__partners-list li {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  color: var(--text);
+}
+
+.donate-page__partners-list li + li::before {
+  content: "◆";
+  margin: 0 16px;
+  font-size: 0.55rem;
+  vertical-align: middle;
+  color: var(--gold);
+  opacity: 0.6;
+}
+
+.donate-page__partners-text {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.8;
+}
+
+.donate-page__quote {
+  margin-top: 24px;
+  padding-left: 20px;
+  border-left: 1px solid var(--gold);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1rem;
+  line-height: 1.8;
+  color: var(--gold-light);
 }
 
 /* ─── How It Works ───────────────────────────────────────────────────── */
@@ -114,6 +242,163 @@
   line-height: 1.7;
 }
 
+/* ─── Impact ─────────────────────────────────────────────────────────── */
+.donate-page__impact {
+  padding: 56px 0;
+  border-top: 1px solid var(--surface-3);
+}
+
+.donate-page__impact .gold-divider { margin-bottom: 20px; }
+
+.donate-page__impact-intro {
+  max-width: 560px;
+  margin-bottom: 40px;
+  font-size: 0.95rem;
+  color: var(--text-body);
+  text-shadow: var(--text-shadow-bg);
+  line-height: 1.8;
+}
+
+.donate-page__impact-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.donate-page__stat {
+  position: relative;
+  padding: 40px 24px 32px;
+  text-align: center;
+  background: var(--surface);
+  border: 1px solid var(--surface-3);
+  border-radius: var(--radius);
+  transition: border-color var(--transition);
+}
+
+.donate-page__stat::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 56px;
+  height: 1px;
+  transform: translateX(-50%);
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+.donate-page__stat:hover { border-color: var(--gold-border); }
+
+.donate-page__stat-value {
+  font-family: var(--font-serif);
+  font-size: clamp(2.5rem, 5vw, 3.75rem);
+  font-weight: 600;
+  line-height: 1;
+  color: var(--gold);
+  font-variant-numeric: tabular-nums;
+}
+
+.donate-page__stat-label {
+  margin-top: 14px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.donate-page__stat-badge {
+  display: inline-block;
+  margin-top: 16px;
+  padding: 4px 12px;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  background: var(--gold-dim);
+  border: 1px solid var(--gold-border);
+  border-radius: 999px;
+}
+
+/* ─── Tax Redirect (3,5%) ────────────────────────────────────────────── */
+.donate-page__tax {
+  margin-top: 56px;
+  padding: 56px;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 56px;
+  align-items: start;
+  background:
+    radial-gradient(ellipse 70% 90% at 100% 0%, var(--gold-dim), transparent 70%),
+    var(--surface);
+  border: 1px solid var(--gold-border);
+  border-radius: var(--radius);
+}
+
+.donate-page__tax-head .gold-label { margin-bottom: 4px; }
+.donate-page__tax-head .gold-divider { margin-bottom: 20px; }
+
+.donate-page__tax-lead {
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: var(--text);
+}
+
+.donate-page__tax-panel {
+  position: sticky;
+  top: calc(var(--nav-height) + 24px);
+  padding: 40px 28px;
+  text-align: center;
+  background: var(--surface-2);
+  border: 1px solid var(--gold-border);
+  border-radius: var(--radius);
+}
+
+.donate-page__tax-figure {
+  font-family: var(--font-serif);
+  font-size: clamp(3.5rem, 8vw, 5.5rem);
+  font-weight: 600;
+  line-height: 1;
+  color: var(--gold);
+}
+
+.donate-page__tax-caption {
+  margin: 14px 0 28px;
+  font-size: 0.84rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+.donate-page__tax-cta {
+  width: 100%;
+  justify-content: center;
+  padding: 14px 20px;
+}
+
+.donate-page__tax-hint {
+  margin-top: 14px;
+  font-size: 0.75rem;
+  color: var(--text-subtle);
+}
+
+.donate-page__share {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  margin-top: 8px;
+  padding-top: 28px;
+  border-top: 1px solid var(--surface-3);
+}
+
+.donate-page__share-title {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--text);
+}
+
 /* ─── Form Section ───────────────────────────────────────────────────── */
 .donate-page__form-section {
   padding: 56px 0;
@@ -130,8 +415,42 @@
 .donate-page__form-note {
   margin-top: 20px;
   font-size: 0.88rem;
+  color: var(--text-body);
+  text-shadow: var(--text-shadow-bg);
+  line-height: 1.8;
+}
+
+/* ─── Contact ────────────────────────────────────────────────────────── */
+.donate-page__contact {
+  padding: 32px;
+  background: var(--surface-2);
+  border: 1px solid var(--gold-border);
+  border-radius: var(--radius);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.donate-page__contact-text {
+  font-size: 0.95rem;
   color: var(--text-muted);
   line-height: 1.8;
+}
+
+.donate-page__contact-link {
+  align-self: flex-start;
+  font-family: var(--font-serif);
+  font-size: clamp(1.15rem, 2.4vw, 1.5rem);
+  color: var(--gold);
+  word-break: break-word;
+  border-bottom: 1px solid var(--gold-border);
+  padding-bottom: 4px;
+  transition: color var(--transition), border-color var(--transition);
+}
+
+.donate-page__contact-link:hover {
+  color: var(--gold-light);
+  border-color: var(--gold-light);
 }
 
 /* ─── Form ───────────────────────────────────────────────────────────── */
@@ -281,14 +600,21 @@
 
 /* ─── Responsive ─────────────────────────────────────────────────────── */
 @media (max-width: 1024px) {
-  .donate-page__form-section {
+  .donate-page__form-section,
+  .donate-page__program,
+  .donate-page__tax {
     grid-template-columns: 1fr;
     gap: 40px;
   }
+  .donate-page__tax-panel { position: static; }
 }
 
 @media (max-width: 768px) {
+  .donate-page__goals { grid-template-columns: 1fr; }
+  .donate-page__tax { padding: 32px 24px; }
+  .donate-page__partners-list li + li::before { margin: 0 10px; }
   .donate-page__steps { grid-template-columns: 1fr; }
   .donate-page__who-grid { grid-template-columns: 1fr; }
+  .donate-page__impact-grid { grid-template-columns: 1fr; }
   .donate-page__form-grid { grid-template-columns: 1fr; }
 }

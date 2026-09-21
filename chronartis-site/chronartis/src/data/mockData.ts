@@ -201,31 +201,31 @@ export const sponsors: Sponsor[] = [
   {
     id: 'sp-1',
     name: 'Exim Banca Românească',
-    logoUrl: 'https://imagedelivery.net/KQi4tCzGZRQmaudEvugp8w/cdd79a43-2896-43d3-eeea-fbc46c4a2f00/public',
+    logoUrl: '/sponsors/exim.png',
     websiteUrl: 'https://www.eximbank.ro/',
   },
   {
     id: 'sp-2',
     name: 'Cărturești',
-    logoUrl: 'https://imagedelivery.net/KQi4tCzGZRQmaudEvugp8w/415906e3-204a-4388-9459-985fbb7fa400/public',
+    logoUrl: '/sponsors/carturesti.png',
     websiteUrl: 'https://carturesti.ro/',
   },
   {
     id: 'sp-3',
     name: 'Bookzone',
-    logoUrl: 'https://imagedelivery.net/KQi4tCzGZRQmaudEvugp8w/fa8e189e-8e11-4f5d-cdc7-f84285c7a300/public',
+    logoUrl: '/sponsors/bookzone.png',
     websiteUrl: 'https://bookzone.ro/',
   },
   {
     id: 'sp-4',
     name: 'Adina Buzatu',
-    logoUrl: 'https://imagedelivery.net/KQi4tCzGZRQmaudEvugp8w/240ebeb2-a6e0-4943-6948-7df765a26f00/public',
+    logoUrl: '/sponsors/adina-buzatu.png',
     websiteUrl: 'https://adinabuzatu.ro/',
   },
   {
     id: 'sp-5',
     name: 'Stay Coffee & Bar',
-    logoUrl: 'https://imagedelivery.net/KQi4tCzGZRQmaudEvugp8w/090892b7-e832-4922-f183-72e141476900/public',
+    logoUrl: '/sponsors/stay.png',
     websiteUrl: 'https://stay.coffee/',
   },
 ];
