@@ -25,7 +25,7 @@ export const pastShows: PastShow[] = [
   {
     id: 'ps-2',
     title: 'La Traviata',
-    category: 'opera',
+    category: 'eveniment',
     coverImage: 'https://picsum.photos/seed/traviata/800/520',
     date: '3 Octombrie 2024',
     venue: 'Opera Națională București',
@@ -45,7 +45,7 @@ export const pastShows: PastShow[] = [
   {
     id: 'ps-3',
     title: 'Lacul Lebedelor',
-    category: 'dance',
+    category: 'eveniment',
     coverImage: 'https://picsum.photos/seed/swanlake/800/520',
     date: '22 Martie 2024',
     venue: 'Opera Română Cluj',
@@ -123,7 +123,7 @@ export const upcomingShows: UpcomingShow[] = [
   {
     id: 'us-1',
     title: 'Don Giovanni — Mozart',
-    category: 'opera',
+    category: 'eveniment',
     coverImage: 'https://picsum.photos/seed/dongiovanni/800/520',
     date: '16 Mai 2025',
     time: '19:30',

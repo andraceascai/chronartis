@@ -20,9 +20,9 @@ export default function Home() {
           </h1>
           <div className="gold-divider gold-divider--wide fade-in-3" />
           <p className="hero__subtitle fade-in-3">
-            Creăm experiențe culturale extraordinare: concerte, operă,
+            Creăm experiențe culturale extraordinare: concerte,
             <br />
-            teatru și dans, pentru publicul care caută excepționalul.
+            teatru și spectacole, pentru publicul care caută excepționalul.
           </p>
           <div className="hero__actions fade-in-3">
             <a href="/upcoming" className="btn-gold btn-gold-filled">
@@ -56,19 +56,56 @@ export default function Home() {
             </div>
             <div className="about__text">
               <p>
-                Chronartis a fost fondată cu o singură convingere: că marea artă
-                trebuie să ajungă la cât mai mulți oameni. Din 2024, am produs
-                și prezentat peste 200 de evenimente culturale în toată România,
-                de la recitaluri de cameră intime până la spectacole operistice
-                grandioase.
+                La Chronartis, nu am pornit de la un model de business.
+                <br />
+                Am pornit de la o întrebare.
+                <br />
+                Cum readucem tinerii aproape de cultură într-o lume care îi
+                îndepărtează de ea în fiecare zi?
               </p>
               <p>
-                Colaborăm cu cei mai apreciați artiști și instituții din
-                România, alături de interpreți internaționali, pentru a aduce
-                programe de cel mai înalt calibru pe scenele din toată țara.
-                Fiecare eveniment pe care îl creăm este modelat de angajamentul
-                nostru față de excelența artistică, accesibilitate și puterea de
-                neînlocuit a spectacolului live.
+                În ultimii ani, sălile de concert, teatrele și spațiile
+                culturale au devenit tot mai tăcute în ceea ce privește prezența
+                noilor generații. Am văzut locuri construite pentru emoție,
+                reflecție și frumusețe rămânând tot mai departe de adolescenții
+                și tinerii care ar avea poate cea mai mare nevoie de ele.
+              </p>
+              <p>
+                Și atunci am înțeles ceva esențial: Cultura nu trebuie vândută.
+                Cultura trebuie dăruită. Din această convingere s-a născut
+                Chronartis, începând cu anul 2025, un proiect construit din
+                pasiune autentică, responsabilitate culturală și dorința sinceră
+                de a crea o punte între generații.
+                <p>
+                  <br />
+                  Credem că arta nu aparține unui cerc restrâns. Nu aparține
+                  elitismului. Nu aparține trecutului. Arta aparține tuturor
+                  celor care au nevoie să simtă ceva real. Chronartis există
+                  pentru tinerii care nu s-au regăsit niciodată în discursurile
+                  rigide ale culturii tradiționale. <br />
+                  Pentru adolescenții care au fost făcuți să creadă că lumea
+                  concertelor, a teatrului sau a marilor experiențe culturale
+                  „nu este pentru ei”. Pentru cei care caută sens, apartenență
+                  și emoție într-o societate care îi ascultă tot mai puțin.
+                </p>
+                <br />
+                <p>
+                  Noi vrem să schimbăm asta. <br />
+                  Nu prin compromisuri.
+                  <br /> Nu prin superficialitate. <br />
+                  Ci prin experiențe culturale vii, moderne și accesibile,
+                  capabile să vorbească pe limba unei noi generații fără să își
+                  piardă profunzimea. Chronartis nu este doar un proiect
+                  cultural. Este o declarație. O declarație că tinerii merită să
+                  fie invitați în cultură, nu testați înainte să intre. Că
+                  emoția autentică poate schimba destine. Și că viitorul artei
+                  depinde de curajul de a o face din nou relevantă. <br />
+                  Pentru noi, cultura nu este un lux. Este o nevoie umană
+                  fundamentală. Iar dacă o generație întreagă s-a îndepărtat de
+                  ea, atunci responsabilitatea nu este a lor. Este a noastră să
+                  reconstruim drumul înapoi. Acesta este începutul Chronartis.
+                  Și credem că este doar începutul unei schimbări mult mai mari.
+                </p>
               </p>
             </div>
           </div>
@@ -135,19 +172,19 @@ const PILLARS = [
     icon: "♪",
     title: "Excelență Artistică",
     description:
-      "Colaborăm doar cu interpreți și ansambluri de cel mai înalt nivel, asigurând că fiecare seară este una de neuitat.",
+      "Colaborăm exclusiv cu artiști și ansambluri de elită, transformând fiecare apariție într-o experiență culturală memorabilă.",
   },
   {
     icon: "◇",
     title: "Acoperire Culturală",
     description:
-      "De pe scenele capitalei până la sălile regionale, aducem cultură de clasă mondială publicurilor din toată România.",
+      "DDe la marile scene ale capitalei până în orașele din întreaga țară, aducem cultura de înaltă clasă mai aproape de fiecare generație.",
   },
   {
     icon: "❧",
     title: "Scop Social",
     description:
-      "Prin programul nostru de donare a biletelor, ne asigurăm că barierele financiare nu vor sta niciodată între oameni și marea artă.",
+      "Prin programnul nostrum national “primul meu spectacol” ne asiguram ca barierele financiare nu vor sta niciodata intre tineri si arta.",
   },
 ] as const;
 

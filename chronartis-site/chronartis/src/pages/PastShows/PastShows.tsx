@@ -9,11 +9,10 @@ const ALL = 'all' as const;
 type Filter = typeof ALL | ShowCategory;
 
 const FILTERS: { label: string; value: Filter }[] = [
-  { label: 'Toate',   value: 'all' },
-  { label: 'Concert', value: 'concert' },
-  { label: 'Operă',   value: 'opera' },
-  { label: 'Teatru',  value: 'theater' },
-  { label: 'Dans',    value: 'dance' },
+  { label: "Toate", value: "all" },
+  { label: "Concert", value: "concert" },
+  { label: "Evenimente", value: "eveniment" },
+  { label: "Teatru", value: "theater" },
 ];
 
 export default function PastShows() {

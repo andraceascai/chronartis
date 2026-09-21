@@ -6,12 +6,11 @@ interface Props {
   show: PastShow;
 }
 
-const CATEGORY_LABELS: Record<PastShow['category'], string> = {
-  concert: 'Concert',
-  opera:   'Operă',
-  theater: 'Teatru',
-  dance:   'Dans',
-  other:   'Eveniment',
+const CATEGORY_LABELS: Record<PastShow["category"], string> = {
+  concert: "Concert",
+  eveniment: "Eveniment",
+  theater: "Teatru",
+  other: "Eveniment",
 };
 
 export default function ShowCard({ show }: Props) {

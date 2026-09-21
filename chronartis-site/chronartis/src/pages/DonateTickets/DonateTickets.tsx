@@ -240,37 +240,44 @@ export default function DonateTickets() {
 
 const STEPS = [
   {
-    title: 'Donatorii oferă biletele lor',
-    description: 'Spectatorii cu bilete nefolosite sau primite în dar le trimit prin intermediul acestui formular, specificând spectacolul și numărul de locuri disponibile.',
+    title: "Donatorii oferă biletele lor",
+    description:
+      "Prin sprijinul partenerilor, sponsorilor și al persoanelor care aleg să doneze bilete, transformăm generozitatea în acces real la cultură pentru tinerii care au nevoie de experiențe care le deschid lumea interioară și îi îmbogățesc interior.",
   },
   {
-    title: 'Verificăm și asociem',
-    description: 'Echipa noastră analizează fiecare cerere și asociază biletele donate cu beneficiarii eligibili de pe lista noastră de așteptare.',
+    title: "Căutăm și ne extindem",
+    description:
+      "Echipa noastră este în legătură directă cu cadrele didactice din școlile și liceele partenere, care identifică tinerii, fără sprijinul cărora această misiune nu ar fi posibilă.",
   },
   {
-    title: 'Beneficiarii sunt notificați',
-    description: 'Destinatarii primesc biletele prin email sau poștă, împreună cu orice informații practice de care au nevoie pentru eveniment.',
+    title: "Beneficiarii sunt notificați",
+    description:
+      "Beneficiarii primesc biletele în mod gratuit, alături de toate informațiile practice necesare, pentru a transforma participarea lor într-o experiență completă și lipsită de bariere.",
   },
   {
-    title: 'Toată lumea participă',
-    description: 'Beneficiarii trăiesc experiența unui eveniment cultural live — mulți pentru prima oară — grație generozității comunității noastre.',
+    title: "Toată lumea participă",
+    description:
+      "Beneficiarii trăiesc experiența unui eveniment cultural live (de multe ori pentru prima dată),  datorită generozității comunității noastre.",
   },
 ] as const;
 
 const BENEFICIARIES = [
   {
-    icon: '✦',
-    title: 'Persoane Vârstnice',
-    description: 'Pensionari cu venituri limitate care poate nu își permit bilete, dar care prețuiesc din tot sufletul experiența spectacolului live.',
+    icon: "✦",
+    title: "Persoane Vârstnice",
+    description:
+      "Sprijinim persoanele vârstnice și pensionarii cu venituri limitate, pentru care accesul la cultură poate fi dificil, dar pentru care experiența spectacolului live rămâne o valoare profund prețuită.",
   },
   {
-    icon: '◇',
-    title: 'Copii și Tineri',
-    description: 'Copii din familii cu venituri reduse și organizații de tineret, pentru care o primă întâlnire cu opera, teatrul sau muzica clasică poate fi transformatoare.',
+    icon: "◇",
+    title: "Copii și Tineri",
+    description:
+      "Sprijinim copiii și tinerii din familii cu venituri reduse, din medii defavorizate sau din centre de plasament, pentru care prima întâlnire cu opera, teatrul sau muzica clasică poate deveni o experiență transformatoare.",
   },
   {
-    icon: '❧',
-    title: 'Alte Persoane Aflate în Nevoie',
-    description: 'Persoane care se confruntă cu dificultăți — medicale, financiare sau sociale — pentru care o seară culturală oferă un moment de bucurie și alinare.',
+    icon: "❧",
+    title: "Alte Persoane Aflate în Nevoie",
+    description:
+      "Persoane care se confruntă cu dificultăți, medicale, financiare sau sociale, pentru care o seară culturală oferă un moment de bucurie și alinare.",
   },
 ] as const;

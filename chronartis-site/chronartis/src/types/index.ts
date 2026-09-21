@@ -1,4 +1,4 @@
-export type ShowCategory = 'concert' | 'theater' | 'opera' | 'dance' | 'other';
+export type ShowCategory = 'concert' | 'theater' | 'eveniment' | 'other';
 
 export interface GalleryItem {
   id: string;
