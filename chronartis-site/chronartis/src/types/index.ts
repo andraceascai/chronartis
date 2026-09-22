@@ -7,11 +7,6 @@ export interface GalleryItem {
   caption?: string;
 }
 
-export interface TicketLink {
-  platform: string;
-  url: string;
-}
-
 export interface PastShow {
   id: string;
   title: string;
@@ -25,19 +20,6 @@ export interface PastShow {
   director?: string;
   cast?: string[];
   gallery: GalleryItem[];
-}
-
-export interface UpcomingShow {
-  id: string;
-  title: string;
-  category: ShowCategory;
-  coverImage: string;
-  date: string;
-  time: string;
-  venue: string;
-  city: string;
-  description: string;
-  ticketLinks: TicketLink[];
 }
 
 export interface Sponsor {

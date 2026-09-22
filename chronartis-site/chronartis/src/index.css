@@ -53,7 +53,7 @@ body::before {
   content: '';
   position: fixed;
   inset: 0;
-  background-image: url('/bg.jpg');
+  background-image: url('https://imagedelivery.net/KQi4tCzGZRQmaudEvugp8w/dc211671-9683-4800-1ab6-59d9ff098900/public');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

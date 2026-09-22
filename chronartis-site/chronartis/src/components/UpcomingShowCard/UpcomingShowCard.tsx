@@ -1,24 +1,5 @@
+import type { SpectacolDb } from '../../types/db';
 import './UpcomingShowCard.css';
-
-// Forma exactă a unui document din colecția "spectacole" (vezi
-// chronartis-site/backend/models/Spectacole.js) — nu tipul PastShow/UpcomingShow
-// din src/types, care era pentru mockData.
-export interface TicketLinkDb {
-  platforma: string;
-  url: string;
-}
-
-export interface SpectacolDb {
-  _id: string;
-  titlu: string;
-  categorie: string;
-  afis: string;
-  data: string;
-  ora: string;
-  locatie: string;
-  descriere: string;
-  linkuriBilete: TicketLinkDb[];
-}
 
 interface Props {
   show: SpectacolDb;

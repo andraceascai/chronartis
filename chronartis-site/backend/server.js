@@ -10,6 +10,7 @@ app.use(cors());
 // importă rutele după ce DB e conectat
 const spectacoleRouter = require('./routes/spectacole');
 const sponsoriRouter = require('./routes/sponsori');
+const statisticiRouter = require('./routes/statistici');
 
 // conectează DB și pornește serverul
 (async () => {
@@ -17,6 +18,7 @@ const sponsoriRouter = require('./routes/sponsori');
     await connectDB();
     app.use('/api', spectacoleRouter);
     app.use('/api', sponsoriRouter);
+    app.use('/api', statisticiRouter);
 
     const port = process.env.PORT || 4000;
     app.listen(port, () => console.log(`Server listening on ${port}`));

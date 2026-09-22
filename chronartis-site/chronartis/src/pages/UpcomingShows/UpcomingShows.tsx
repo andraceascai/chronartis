@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import Navbar from "../../components/Navbar/Navbar";
-import UpcomingShowCard, {
-  type SpectacolDb,
-} from "../../components/UpcomingShowCard/UpcomingShowCard";
+import UpcomingShowCard from "../../components/UpcomingShowCard/UpcomingShowCard";
 import { api } from "../../lib/api";
+import type { SpectacolDb } from "../../types/db";
 import "./UpcomingShows.css";
 
 type Status = "loading" | "ready" | "error";

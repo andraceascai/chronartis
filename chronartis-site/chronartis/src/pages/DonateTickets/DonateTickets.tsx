@@ -1,15 +1,47 @@
 import { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
+import { api } from "../../lib/api";
+import type { SponsorDb, StatisticaDb } from "../../types/db";
 import "./DonateTickets.css";
 
 export default function DonateTickets() {
   const { hash } = useLocation();
+  const [partners, setPartners] = useState<SponsorDb[]>([]);
+  const [stats, setStats] = useState<StatisticaDb[]>([]);
 
   // Ajunge la secțiune când pagina e deschisă direct cu #ancoră (ex. din Acasă).
   useEffect(() => {
     if (hash) document.getElementById(hash.slice(1))?.scrollIntoView();
   }, [hash]);
+
+  // Parteneri (secțiunea "Primul meu spectacol") și cifrele din "Impactul
+  // Nostru" vin din baza de date — se actualizează doar acolo, fără cod nou.
+  useEffect(() => {
+    let cancelled = false;
+
+    api
+      .get<SponsorDb[]>("/sponsori")
+      .then((res) => {
+        if (!cancelled) setPartners(res.data);
+      })
+      .catch((error) => {
+        console.error("Eroare la citirea partenerilor:", error);
+      });
+
+    api
+      .get<StatisticaDb[]>("/statistici")
+      .then((res) => {
+        if (!cancelled) setStats(res.data);
+      })
+      .catch((error) => {
+        console.error("Eroare la citirea statisticilor:", error);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   return (
     <>
@@ -99,8 +131,8 @@ export default function DonateTickets() {
             <div className="donate-page__partners">
               <p className="gold-label">Parteneri care susțin programul</p>
               <ul className="donate-page__partners-list">
-                {PARTNERS.map((name) => (
-                  <li key={name}>{name}</li>
+                {partners.map((partner) => (
+                  <li key={partner._id}>{partner.nume}</li>
                 ))}
               </ul>
               <p className="donate-page__partners-text">
@@ -165,13 +197,13 @@ export default function DonateTickets() {
               magia unui spectacol live.
             </p>
             <div className="donate-page__impact-grid">
-              {IMPACT_STATS.map((stat) => (
-                <div key={stat.label} className="donate-page__stat">
+              {stats.map((stat) => (
+                <div key={stat._id} className="donate-page__stat">
                   <p className="donate-page__stat-value">
-                    <CountUp target={stat.value} />+
+                    <CountUp target={stat.valoare} />+
                   </p>
-                  <p className="donate-page__stat-label">{stat.label}</p>
-                  {stat.growing && (
+                  <p className="donate-page__stat-label">{stat.eticheta}</p>
+                  {stat.inCrestere && (
                     <span className="donate-page__stat-badge">în creștere</span>
                   )}
                 </div>
@@ -294,14 +326,6 @@ export default function DonateTickets() {
 const CONTACT_EMAIL = "balancristian@chronartis.com";
 const TAX_FORM_URL = "https://formular230.ro/asociatia-chronartis";
 
-const PARTNERS = [
-  "Exim Banca Românească",
-  "Bookzone",
-  "Cărturești",
-  "Adina Buzatu",
-  "Stay Coffee & Bar",
-] as const;
-
 function CopyLinkButton({ url }: { url: string }) {
   const [copied, setCopied] = useState(false);
 
@@ -321,13 +345,6 @@ function CopyLinkButton({ url }: { url: string }) {
     </button>
   );
 }
-
-// Actualizează aici cifrele pe măsură ce programul crește.
-const IMPACT_STATS = [
-  { label: "Vârstnici", value: 500, growing: false },
-  { label: "Tineri", value: 4500, growing: true },
-  { label: "Persoane cu dizabilități", value: 100, growing: false },
-] as const;
 
 const formatNumber = (n: number) =>
   String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ".");

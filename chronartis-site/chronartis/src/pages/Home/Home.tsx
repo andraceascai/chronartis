@@ -1,10 +1,41 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
 import SponsorBar from "../../components/SponsorBar/SponsorBar";
-import { socialLinks, sponsors } from "../../data/mockData";
+import { api } from "../../lib/api";
+import { socialLinks } from "../../data/mockData";
+import type { Sponsor } from "../../types";
+import type { SponsorDb } from "../../types/db";
 import "./Home.css";
 
 export default function Home() {
+  const [sponsors, setSponsors] = useState<Sponsor[]>([]);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    api
+      .get<SponsorDb[]>("/sponsori")
+      .then((res) => {
+        if (cancelled) return;
+        setSponsors(
+          res.data.map((s) => ({
+            id: s._id,
+            name: s.nume,
+            logoUrl: s.logoUrl,
+            websiteUrl: s.websiteUrl,
+          })),
+        );
+      })
+      .catch((error) => {
+        console.error("Eroare la citirea sponsorilor:", error);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   return (
     <>
       <Navbar />
