@@ -1,60 +1,95 @@
-import type { UpcomingShow } from '../../types';
 import './UpcomingShowCard.css';
 
-interface Props {
-  show: UpcomingShow;
+// Forma exactă a unui document din colecția "spectacole" (vezi
+// chronartis-site/backend/models/Spectacole.js) — nu tipul PastShow/UpcomingShow
+// din src/types, care era pentru mockData.
+export interface TicketLinkDb {
+  platforma: string;
+  url: string;
 }
 
-const CATEGORY_LABELS: Record<UpcomingShow['category'], string> = {
+export interface SpectacolDb {
+  _id: string;
+  titlu: string;
+  categorie: string;
+  afis: string;
+  data: string;
+  ora: string;
+  locatie: string;
+  descriere: string;
+  linkuriBilete: TicketLinkDb[];
+}
+
+interface Props {
+  show: SpectacolDb;
+}
+
+// Categoria vine liberă din baza de date (fără validare la nivel de schemă),
+// deci acceptăm orice text și afișăm o etichetă cunoscută dacă o recunoaștem.
+const CATEGORY_LABELS: Record<string, string> = {
   concert: 'Concert',
-  opera:   'Operă',
+  teatru: 'Teatru',
   theater: 'Teatru',
-  dance:   'Dans',
-  other:   'Eveniment',
+  eveniment: 'Eveniment',
+  opera: 'Operă',
+  dans: 'Dans',
+  other: 'Eveniment',
 };
+
+function categoryLabel(categorie: string) {
+  return CATEGORY_LABELS[categorie?.toLowerCase()] ?? categorie;
+}
+
+function formatDate(dateString: string) {
+  const date = new Date(dateString);
+  if (Number.isNaN(date.getTime())) return dateString;
+  return date.toLocaleDateString('ro-RO', { year: 'numeric', month: 'long', day: 'numeric' });
+}
 
 export default function UpcomingShowCard({ show }: Props) {
   return (
     <article className="upcoming-card">
       <div className="upcoming-card__image-wrap">
-        <img src={show.coverImage} alt={show.title} className="upcoming-card__image" loading="lazy" />
-        <span className="upcoming-card__category gold-label">{CATEGORY_LABELS[show.category]}</span>
+        <img src={show.afis} alt={show.titlu} className="upcoming-card__image" loading="lazy" />
+        <span className="upcoming-card__category gold-label">{categoryLabel(show.categorie)}</span>
       </div>
 
       <div className="upcoming-card__content">
-        <h3 className="upcoming-card__title">{show.title}</h3>
+        <h3 className="upcoming-card__title">{show.titlu}</h3>
 
         <div className="upcoming-card__meta">
           <div className="upcoming-card__meta-item">
             <CalendarIcon />
-            <span>{show.date} — {show.time}</span>
+            <span>{formatDate(show.data)} — ora {show.ora}</span>
           </div>
           <div className="upcoming-card__meta-item">
             <LocationIcon />
-            <span>{show.venue}, {show.city}</span>
+            <span>{show.locatie}</span>
           </div>
         </div>
 
         <div className="gold-divider" />
 
-        <p className="upcoming-card__description">{show.description}</p>
+        <p className="upcoming-card__description">{show.descriere}</p>
 
-        <div className="upcoming-card__tickets">
-          <span className="gold-label">Cumpără Bilete</span>
-          <div className="upcoming-card__ticket-links">
-            {show.ticketLinks.map(link => (
-              <a
-                key={link.platform}
-                href={link.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-gold"
-              >
-                {link.platform}
-              </a>
-            ))}
+        {show.linkuriBilete?.length > 0 && (
+          <div className="upcoming-card__tickets">
+            <span className="gold-label">Cumpără Bilete</span>
+            <div className="upcoming-card__ticket-links">
+              {show.linkuriBilete.map(link => (
+                <a
+                  key={link.url}
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-gold"
+                >
+                  {link.platforma}
+                </a>
+              ))}
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </article>
   );

@@ -24,3 +24,11 @@
   flex-direction: column;
   gap: 28px;
 }
+
+.upcoming-shows__empty {
+  padding: 48px 0;
+  text-align: center;
+  font-size: 0.95rem;
+  color: var(--text-body);
+  text-shadow: var(--text-shadow-bg);
+}
