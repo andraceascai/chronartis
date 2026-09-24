@@ -25,7 +25,9 @@ export default function Navbar() {
   }, [location]);
 
   return (
-    <header className={`nav ${scrolled ? "nav--scrolled" : ""}`}>
+    <header
+      className={`nav ${scrolled ? "nav--scrolled" : ""} ${menuOpen ? "nav--menu-open" : ""}`}
+    >
       <div className="nav__inner container">
         <NavLink to="/" className="nav__logo">
           <div className="nav__logo-img-wrap">

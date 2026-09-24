@@ -11,6 +11,7 @@ app.use(cors());
 const spectacoleRouter = require('./routes/spectacole');
 const sponsoriRouter = require('./routes/sponsori');
 const statisticiRouter = require('./routes/statistici');
+const arhivaRouter = require('./routes/arhiva');
 
 // conectează DB și pornește serverul
 (async () => {
@@ -19,6 +20,7 @@ const statisticiRouter = require('./routes/statistici');
     app.use('/api', spectacoleRouter);
     app.use('/api', sponsoriRouter);
     app.use('/api', statisticiRouter);
+    app.use('/api', arhivaRouter);
 
     const port = process.env.PORT || 4000;
     app.listen(port, () => console.log(`Server listening on ${port}`));

@@ -7,8 +7,10 @@
   --gold-hover:    rgba(201, 168, 76, 0.08);
 
   --black:         #080808;
-  --surface:       #111111;
-  --surface-2:     #181818;
+  /* Ușor transparente (nu opace), ca fundalul cu imagine al site-ului să
+     se ghicească discret prin toate cardurile — fără să scadă lizibilitatea. */
+  --surface:       rgba(17, 17, 17, 0.82);
+  --surface-2:     rgba(24, 24, 24, 0.82);
   --surface-3:     #222222;
 
   --text:          #f0ece4;

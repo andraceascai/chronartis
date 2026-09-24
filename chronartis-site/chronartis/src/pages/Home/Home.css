@@ -7,6 +7,13 @@
   justify-content: center;
   text-align: center;
   overflow: hidden;
+  /* Rezervă loc jos pentru .hero__scroll-hint (poziționat absolut, bottom:40px).
+     Fără acest padding, pe ferestre înguste-dar-înalte textul se rupe pe mai
+     multe rânduri, conținutul centrat crește pe verticală, iar la un moment
+     dat ajunge să se suprapună peste hint. min-height (nu height) lasă secțiunea
+     să crească peste 100vh dacă e nevoie, deci suprapunerea devine imposibilă,
+     nu doar mai puțin probabilă. */
+  padding-bottom: 140px;
 }
 
 .hero__bg {
@@ -24,7 +31,12 @@
 .hero__content {
   position: relative;
   z-index: 1;
+  width: 100%;
   max-width: 760px;
+  /* Fără padding orizontal, textul se lipea de marginile ecranului și
+     ieșea din viewport pe telefoane (fără width:100% mai sus, .hero__content
+     se dimensiona după textul nefragmentat, nu după ecran). */
+  padding-inline: 24px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -68,8 +80,13 @@
 .hero__scroll-hint {
   position: absolute;
   bottom: 40px;
-  /* left: 50%; */
-  transform: translateX(-50%);
+  /* Centrat cu left/right + margin auto, nu cu transform: translateX(-50%) —
+     animația de mai jos setează și ea `transform`, ceea ce ar anula orice
+     translateX static pus aici (ultima valoare de transform câștigă). */
+  left: 0;
+  right: 0;
+  width: max-content;
+  margin-inline: auto;
   display: flex;
   flex-direction: column;
   align-items: center;

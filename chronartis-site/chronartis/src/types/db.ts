@@ -34,3 +34,24 @@ export interface SpectacolDb {
   descriere: string;
   linkuriBilete: TicketLinkDb[];
 }
+
+export interface GalerieItemDb {
+  _id?: string;
+  tip: 'image' | 'video';
+  url: string;
+  descriere?: string;
+}
+
+export interface ArhivaDb {
+  _id: string;
+  titlu: string;
+  categorie: string;
+  afis: string;
+  data: string;
+  locatie: string;
+  oras: string;
+  descriere: string;
+  regizor?: string;
+  distributie?: string[];
+  galerie: GalerieItemDb[];
+}

@@ -1,12 +1,13 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Navbar from '../../components/Navbar/Navbar';
 import ShowCard from '../../components/ShowCard/ShowCard';
-import { pastShows } from '../../data/mockData';
-import type { ShowCategory } from '../../types';
+import { api } from '../../lib/api';
+import { categoryInfo, type CategoryKey } from '../../lib/showFormat';
+import type { ArhivaDb } from '../../types/db';
 import './PastShows.css';
 
 const ALL = 'all' as const;
-type Filter = typeof ALL | ShowCategory;
+type Filter = typeof ALL | CategoryKey;
 
 const FILTERS: { label: string; value: Filter }[] = [
   { label: "Toate", value: "all" },
@@ -15,12 +16,37 @@ const FILTERS: { label: string; value: Filter }[] = [
   { label: "Teatru", value: "theater" },
 ];
 
+type Status = 'loading' | 'ready' | 'error';
+
 export default function PastShows() {
   const [activeFilter, setActiveFilter] = useState<Filter>(ALL);
+  const [shows, setShows] = useState<ArhivaDb[]>([]);
+  const [status, setStatus] = useState<Status>('loading');
+
+  useEffect(() => {
+    let cancelled = false;
+
+    api
+      .get<ArhivaDb[]>('/arhiva')
+      .then((res) => {
+        if (!cancelled) {
+          setShows(res.data);
+          setStatus('ready');
+        }
+      })
+      .catch((error) => {
+        console.error('Eroare la citirea arhivei:', error);
+        if (!cancelled) setStatus('error');
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   const filtered = activeFilter === ALL
-    ? pastShows
-    : pastShows.filter(s => s.category === activeFilter);
+    ? shows
+    : shows.filter(s => categoryInfo(s.categorie).key === activeFilter);
 
   return (
     <>
@@ -49,13 +75,19 @@ export default function PastShows() {
             ))}
           </div>
 
+          {status === 'error' && (
+            <p className="past-shows__empty">
+              Nu am putut încărca arhiva. Încearcă din nou puțin mai târziu.
+            </p>
+          )}
+
           <div className="past-shows__grid">
             {filtered.map(show => (
-              <ShowCard key={show.id} show={show} />
+              <ShowCard key={show._id} show={show} />
             ))}
           </div>
 
-          {filtered.length === 0 && (
+          {status === 'ready' && filtered.length === 0 && (
             <p className="past-shows__empty">Niciun spectacol găsit pentru această categorie.</p>
           )}
         </div>

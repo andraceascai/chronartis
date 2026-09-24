@@ -1,39 +1,38 @@
+import { useState } from 'react';
 import type { SpectacolDb } from '../../types/db';
+import { categoryInfo, formatDate } from '../../lib/showFormat';
+import ImageLightbox from '../ImageLightbox/ImageLightbox';
 import './UpcomingShowCard.css';
 
 interface Props {
   show: SpectacolDb;
 }
 
-// Categoria vine liberă din baza de date (fără validare la nivel de schemă),
-// deci acceptăm orice text și afișăm o etichetă cunoscută dacă o recunoaștem.
-const CATEGORY_LABELS: Record<string, string> = {
-  concert: 'Concert',
-  teatru: 'Teatru',
-  theater: 'Teatru',
-  eveniment: 'Eveniment',
-  opera: 'Operă',
-  dans: 'Dans',
-  other: 'Eveniment',
-};
-
-function categoryLabel(categorie: string) {
-  return CATEGORY_LABELS[categorie?.toLowerCase()] ?? categorie;
-}
-
-function formatDate(dateString: string) {
-  const date = new Date(dateString);
-  if (Number.isNaN(date.getTime())) return dateString;
-  return date.toLocaleDateString('ro-RO', { year: 'numeric', month: 'long', day: 'numeric' });
-}
-
 export default function UpcomingShowCard({ show }: Props) {
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+
   return (
     <article className="upcoming-card">
-      <div className="upcoming-card__image-wrap">
+      <button
+        type="button"
+        className="upcoming-card__image-wrap"
+        onClick={() => setLightboxOpen(true)}
+        aria-label={`Vezi afișul mărit pentru ${show.titlu}`}
+      >
         <img src={show.afis} alt={show.titlu} className="upcoming-card__image" loading="lazy" />
-        <span className="upcoming-card__category gold-label">{categoryLabel(show.categorie)}</span>
-      </div>
+        <span className="upcoming-card__category gold-label">{categoryInfo(show.categorie).label}</span>
+        <span className="upcoming-card__zoom-hint" aria-hidden="true">
+          <ZoomIcon />
+        </span>
+      </button>
+
+      {lightboxOpen && (
+        <ImageLightbox
+          src={show.afis}
+          alt={show.titlu}
+          onClose={() => setLightboxOpen(false)}
+        />
+      )}
 
       <div className="upcoming-card__content">
         <h3 className="upcoming-card__title">{show.titlu}</h3>
@@ -92,6 +91,17 @@ function LocationIcon() {
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
       <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
       <circle cx="12" cy="10" r="3" />
+    </svg>
+  );
+}
+
+function ZoomIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <circle cx="10.5" cy="10.5" r="6.5" />
+      <line x1="15.3" y1="15.3" x2="20" y2="20" />
+      <line x1="10.5" y1="7.5" x2="10.5" y2="13.5" />
+      <line x1="7.5" y1="10.5" x2="13.5" y2="10.5" />
     </svg>
   );
 }

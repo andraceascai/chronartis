@@ -5,15 +5,32 @@
   right: 0;
   z-index: 100;
   height: var(--nav-height);
+  transition: box-shadow var(--transition);
+}
+
+/* Fundalul + blur-ul de la scroll stau pe un pseudo-element, nu pe .nav
+   însuși. backdrop-filter (ca și transform/filter) creează un containing
+   block nou pentru orice descendent "position: fixed" — iar meniul mobil
+   și overlay-ul sunt exact asta. Dacă blur-ul ar sta direct pe .nav, la
+   scroll meniul și-ar calcula top/bottom față de bara de 72px în loc de
+   ecran, exact bug-ul raportat (meniul "sparge" la scroll pe mobil). */
+.nav::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
   background: transparent;
-  transition: background var(--transition), box-shadow var(--transition), backdrop-filter var(--transition);
+  transition: background var(--transition), backdrop-filter var(--transition);
 }
 
 .nav--scrolled {
+  box-shadow: 0 1px 0 var(--gold-border);
+}
+
+.nav--scrolled::before {
   background: rgba(8, 8, 8, 0.92);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  box-shadow: 0 1px 0 var(--gold-border);
 }
 
 .nav__inner {
@@ -105,6 +122,9 @@
 
 .nav__link {
   position: relative;
+  /* Pe mobil (media query mai jos) devine serif + "Acasă" în loc de
+     "ACASĂ"; pe web rămâne fontul sans original — serif + majuscule nu
+     arăta bine. */
   font-size: 0.72rem;
   font-weight: 500;
   letter-spacing: 0.18em;
@@ -140,7 +160,6 @@
   border: 1px solid var(--gold-border);
   border-radius: var(--radius);
   color: var(--gold);
-  letter-spacing: 0.15em;
 }
 
 .nav__link--cta::after { display: none; }
@@ -182,9 +201,17 @@
 .nav__overlay {
   display: none;
   position: fixed;
-  inset: 0;
+  /* Pornește sub bara de 72px, nu peste ea — altfel blur-ul de mai jos
+     estompează și sigla, și butonul de închidere din header. */
+  top: var(--nav-height);
+  left: 0;
+  right: 0;
+  bottom: 0;
   z-index: 99;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(5, 4, 3, 0.7);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  animation: fadeIn 0.25s ease;
 }
 
 /* ─── Mobile ─────────────────────────────────────────────────────────── */
@@ -192,6 +219,16 @@
   .nav__hamburger { display: flex; }
 
   .nav__overlay { display: block; }
+
+  /* Cu meniul deschis, bara nu mai stă transparentă (peste fundalul
+     închis al paginii) — capătă același ton ca panoul de dedesubt, cu o
+     strălucire aurie ancorată exact în colțul unde se ating cele două,
+     ca tranziția să pară continuă, nu o linie dură. */
+  .nav--menu-open::before {
+    background:
+      radial-gradient(ellipse 240px 150px at 100% 100%, var(--gold-dim), transparent 70%),
+      var(--surface);
+  }
 
   .nav__logo-img-wrap {
     width: 38px;
@@ -207,30 +244,61 @@
     top: var(--nav-height);
     right: 0;
     bottom: 0;
-    width: 260px;
+    width: min(280px, 80vw);
     flex-direction: column;
-    align-items: flex-start;
+    align-items: stretch;
     gap: 0;
-    background: var(--surface);
+    background:
+      radial-gradient(ellipse 140% 40% at 100% 0%, var(--gold-dim), transparent 65%),
+      var(--surface);
     border-left: 1px solid var(--gold-border);
+    box-shadow: -32px 0 60px rgba(0, 0, 0, 0.5);
     padding: 32px 28px;
     z-index: 100;
     transform: translateX(100%);
-    transition: transform 0.3s ease;
+    transition: transform 0.35s ease;
   }
 
   .nav__links--open { transform: translateX(0); }
 
   .nav__link {
     width: 100%;
-    padding: 14px 0;
-    font-size: 0.8rem;
+    padding: 15px 0 15px 16px;
+    margin-left: -16px;
+    font-family: var(--font-serif);
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+    text-transform: none;
     border-bottom: 1px solid var(--surface-3);
+    border-left: 2px solid transparent;
+    transition: color var(--transition), border-color var(--transition), background var(--transition);
+  }
+
+  /* Sublinierea de la hover-ul desktop nu are sens într-o listă verticală —
+     aici accentul e o bară aurie în stânga fiecărui link. */
+  .nav__link::after { display: none; }
+
+  .nav__link:hover,
+  .nav__link--active {
+    background: var(--gold-hover);
+    border-left-color: var(--gold);
   }
 
   .nav__link--cta {
-    margin-top: 16px;
-    border: 1px solid var(--gold-border);
+    margin-top: 20px;
+    padding: 14px 16px;
+    background: var(--gold);
+    border: 1px solid var(--gold);
+    border-left: 1px solid var(--gold);
+    color: var(--black);
+    font-weight: 600;
     text-align: center;
+  }
+
+  .nav__link--cta:hover,
+  .nav__link--cta.nav__link--active {
+    background: var(--gold-light);
+    border-color: var(--gold-light);
+    color: var(--black);
   }
 }

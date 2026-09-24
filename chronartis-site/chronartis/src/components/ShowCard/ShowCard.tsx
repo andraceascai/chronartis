@@ -1,31 +1,25 @@
 import { Link } from 'react-router-dom';
-import type { PastShow } from '../../types';
+import type { ArhivaDb } from '../../types/db';
+import { categoryInfo, formatDate } from '../../lib/showFormat';
 import './ShowCard.css';
 
 interface Props {
-  show: PastShow;
+  show: ArhivaDb;
 }
-
-const CATEGORY_LABELS: Record<PastShow["category"], string> = {
-  concert: "Concert",
-  eveniment: "Eveniment",
-  theater: "Teatru",
-  other: "Eveniment",
-};
 
 export default function ShowCard({ show }: Props) {
   return (
-    <Link to={`/archive/${show.id}`} className="show-card" aria-label={`Vezi detalii pentru ${show.title}`}>
+    <Link to={`/archive/${show._id}`} className="show-card" aria-label={`Vezi detalii pentru ${show.titlu}`}>
       <div className="show-card__image-wrap">
-        <img src={show.coverImage} alt={show.title} className="show-card__image" loading="lazy" />
-        <span className="show-card__category gold-label">{CATEGORY_LABELS[show.category]}</span>
+        <img src={show.afis} alt={show.titlu} className="show-card__image" loading="lazy" />
+        <span className="show-card__category gold-label">{categoryInfo(show.categorie).label}</span>
       </div>
       <div className="show-card__body">
-        <h3 className="show-card__title">{show.title}</h3>
+        <h3 className="show-card__title">{show.titlu}</h3>
         <p className="show-card__meta">
-          <span>{show.date}</span>
+          <span>{formatDate(show.data)}</span>
           <span className="show-card__dot">·</span>
-          <span>{show.city}</span>
+          <span>{show.locatie}</span>
         </p>
         <span className="show-card__cta">Vezi Spectacolul →</span>
       </div>

@@ -1,22 +1,51 @@
+import { useEffect, useState } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import Navbar from '../../components/Navbar/Navbar';
 import Gallery from '../../components/Gallery/Gallery';
-import { pastShows } from '../../data/mockData';
+import { api } from '../../lib/api';
+import { categoryInfo, formatDate } from '../../lib/showFormat';
+import type { ArhivaDb } from '../../types/db';
 import './ShowDetail.css';
 
-const CATEGORY_LABELS: Record<string, string> = {
-  concert: 'Concert',
-  opera:   'Operă',
-  theater: 'Teatru',
-  dance:   'Dans',
-  other:   'Eveniment',
-};
+type Status = 'loading' | 'ready' | 'error';
 
 export default function ShowDetail() {
   const { showId } = useParams<{ showId: string }>();
-  const show = pastShows.find(s => s.id === showId);
+  const [show, setShow] = useState<ArhivaDb | null>(null);
+  const [status, setStatus] = useState<Status>('loading');
 
-  if (!show) return <Navigate to="/archive" replace />;
+  useEffect(() => {
+    let cancelled = false;
+    setStatus('loading');
+    setShow(null);
+
+    api
+      .get<ArhivaDb>(`/arhiva/${showId}`)
+      .then((res) => {
+        if (!cancelled) {
+          setShow(res.data);
+          setStatus('ready');
+        }
+      })
+      .catch((error) => {
+        console.error('Eroare la citirea spectacolului:', error);
+        if (!cancelled) setStatus('error');
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [showId]);
+
+  if (status === 'error') return <Navigate to="/archive" replace />;
+  if (!show) return null;
+
+  const gallery = show.galerie.map((item, idx) => ({
+    id: item._id ?? String(idx),
+    type: item.tip,
+    url: item.url,
+    caption: item.descriere,
+  }));
 
   return (
     <>
@@ -25,13 +54,13 @@ export default function ShowDetail() {
 
         {/* ─── Hero Image ────────────────────────────────────────── */}
         <div className="show-detail__hero">
-          <img src={show.coverImage} alt={show.title} className="show-detail__hero-img" />
+          <img src={show.afis} alt={show.titlu} className="show-detail__hero-img" />
           <div className="show-detail__hero-overlay" />
           <div className="show-detail__hero-text container">
-            <span className="gold-label">{CATEGORY_LABELS[show.category]}</span>
-            <h1 className="show-detail__title">{show.title}</h1>
+            <span className="gold-label">{categoryInfo(show.categorie).label}</span>
+            <h1 className="show-detail__title">{show.titlu}</h1>
             <p className="show-detail__meta-hero">
-              {show.date} · {show.venue}, {show.city}
+              {formatDate(show.data)} · {show.locatie}, {show.oras}
             </p>
           </div>
         </div>
@@ -47,7 +76,7 @@ export default function ShowDetail() {
 
             {/* ─── Main Content ───────────────────────────────────── */}
             <article className="show-detail__content">
-              <p className="show-detail__description">{show.fullDescription}</p>
+              <p className="show-detail__description">{show.descriere}</p>
             </article>
 
             {/* ─── Sidebar ────────────────────────────────────────── */}
@@ -58,27 +87,27 @@ export default function ShowDetail() {
 
                 <dl className="show-detail__dl">
                   <dt>Dată</dt>
-                  <dd>{show.date}</dd>
+                  <dd>{formatDate(show.data)}</dd>
 
                   <dt>Locație</dt>
-                  <dd>{show.venue}</dd>
+                  <dd>{show.locatie}</dd>
 
                   <dt>Oraș</dt>
-                  <dd>{show.city}</dd>
+                  <dd>{show.oras}</dd>
 
-                  {show.director && (
+                  {show.regizor && (
                     <>
                       <dt>Regizor</dt>
-                      <dd>{show.director}</dd>
+                      <dd>{show.regizor}</dd>
                     </>
                   )}
                 </dl>
 
-                {show.cast && show.cast.length > 0 && (
+                {show.distributie && show.distributie.length > 0 && (
                   <div className="show-detail__cast">
                     <h4 className="show-detail__cast-heading">Distribuție &amp; Ansamblu</h4>
                     <ul className="show-detail__cast-list">
-                      {show.cast.map(member => (
+                      {show.distributie.map(member => (
                         <li key={member}>{member}</li>
                       ))}
                     </ul>
@@ -89,14 +118,14 @@ export default function ShowDetail() {
           </div>
 
           {/* ─── Gallery ──────────────────────────────────────────── */}
-          {show.gallery.length > 0 && (
+          {gallery.length > 0 && (
             <section className="show-detail__gallery-section">
               <div className="show-detail__gallery-header">
                 <p className="gold-label">Galerie</p>
                 <div className="gold-divider" />
                 <h2 className="section-title">Fotografii de la Eveniment</h2>
               </div>
-              <Gallery items={show.gallery} />
+              <Gallery items={gallery} />
             </section>
           )}
 

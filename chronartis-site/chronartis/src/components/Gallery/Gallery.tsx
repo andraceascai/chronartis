@@ -40,33 +40,92 @@ export default function Gallery({ items }: Props) {
             key={item.id}
             className="gallery__thumb"
             onClick={() => setLightboxIndex(idx)}
-            aria-label={`Open image ${idx + 1}: ${item.caption ?? ''}`}
+            aria-label={`Open ${item.type === "video" ? "video" : "image"} ${idx + 1}: ${item.caption ?? ""}`}
           >
-            <img src={item.url} alt={item.caption ?? `Photo ${idx + 1}`} className="gallery__thumb-img" loading="lazy" />
-            {item.type === 'video' && (
-              <span className="gallery__play-icon" aria-hidden="true">▶</span>
+            {item.type === "video" ? (
+              // #t=0.1 forțează browserul să afișeze un cadru din video ca
+              // previzualizare, în loc de un dreptunghi negru
+              <video
+                src={`${item.url}#t=0.1`}
+                className="gallery__thumb-img"
+                muted
+                playsInline
+                preload="metadata"
+              />
+            ) : (
+              <img
+                src={item.url}
+                alt={item.caption ?? `Photo ${idx + 1}`}
+                className="gallery__thumb-img"
+                loading="lazy"
+              />
+            )}
+            {item.type === "video" && (
+              <span className="gallery__play-icon" aria-hidden="true">
+                ▶
+              </span>
             )}
           </button>
         ))}
       </div>
 
       {isOpen && active && (
-        <div className="gallery__lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
-          <button className="gallery__lb-close" onClick={close} aria-label="Close">✕</button>
-          <button className="gallery__lb-arrow gallery__lb-arrow--prev" onClick={prev} aria-label="Previous image">‹</button>
-          <button className="gallery__lb-arrow gallery__lb-arrow--next" onClick={next} aria-label="Next image">›</button>
+        <div
+          className="gallery__lightbox"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Image viewer"
+        >
+          <button
+            className="gallery__lb-close"
+            onClick={close}
+            aria-label="Close"
+          >
+            ✕
+          </button>
+          <button
+            className="gallery__lb-arrow gallery__lb-arrow--prev"
+            onClick={prev}
+            aria-label="Previous image"
+          >
+            ‹
+          </button>
+          <button
+            className="gallery__lb-arrow gallery__lb-arrow--next"
+            onClick={next}
+            aria-label="Next image"
+          >
+            ›
+          </button>
 
           <div className="gallery__lb-backdrop" onClick={close} />
 
           <figure className="gallery__lb-content">
-            <img src={active.url} alt={active.caption ?? ''} className="gallery__lb-img" />
+            {active.type === "video" ? (
+              // Fără autoPlay: pornește doar când vizitatorul apasă play,
+              // inclusiv atunci când ajunge la el navigând cu next/prev.
+              <video
+                key={active.id}
+                src={active.url}
+                className="gallery__lb-img"
+                controls
+              />
+            ) : (
+              <img
+                src={active.url}
+                alt={active.caption ?? ""}
+                className="gallery__lb-img"
+              />
+            )}
             {active.caption && (
-              <figcaption className="gallery__lb-caption">{active.caption}</figcaption>
+              <figcaption className="gallery__lb-caption">
+                {active.caption}
+              </figcaption>
             )}
           </figure>
 
           <p className="gallery__lb-counter">
-            {(lightboxIndex! + 1)} / {items.length}
+            {lightboxIndex! + 1} / {items.length}
           </p>
         </div>
       )}
