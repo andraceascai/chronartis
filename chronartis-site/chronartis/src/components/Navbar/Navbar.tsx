@@ -34,16 +34,7 @@ export default function Navbar() {
     >
       <div className="nav__inner container">
         <NavLink to="/" className="nav__logo">
-          <div className="nav__logo-img-wrap">
-            <img
-              src="https://imagedelivery.net/KQi4tCzGZRQmaudEvugp8w/8b14856c-dfcd-4247-aab6-e859acf34300/public"
-              alt="Chronartis"
-              className="nav__logo-img"
-            />
-          </div>
-          <div className="nav__logo-labels">
-            <span className="nav__logo-text">Chronartis</span>
-          </div>
+          <img src="/logo-wordmark.png" alt="Chronartis" className="nav__logo-wordmark" />
         </NavLink>
 
         <nav

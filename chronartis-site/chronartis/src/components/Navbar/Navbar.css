@@ -44,73 +44,19 @@
 .nav__logo {
   display: flex;
   align-items: center;
-  gap: 11px;
   line-height: 1;
 }
 
-/* Image circle */
-.nav__logo-img-wrap {
-  position: relative;
-  width: 46px;
-  height: 46px;
-  border-radius: 50%;
-  overflow: hidden;
-  flex-shrink: 0;
-  box-shadow: 0 0 0 1.5px var(--gold-border);
-  transition: box-shadow var(--transition);
+/* Sigla nouă e un singur lockup (text + emblemă integrate într-o imagine),
+   nu mai e nevoie de cerc separat + text alăturat ca la sigla veche. */
+.nav__logo-wordmark {
+  height: 28px;
+  width: auto;
+  transition: opacity var(--transition);
 }
 
-.nav__logo:hover .nav__logo-img-wrap {
-  box-shadow: 0 0 0 1.5px var(--gold);
-}
-
-.nav__logo-img {
-  /* Absolute-center the image, then size it larger than the container
-     so the white margin around the circular emblem is pushed past
-     the overflow:hidden clip — max-width:none overrides the global
-     img { max-width: 100% } rule that would undo this               */
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 128%;
-  height: 128%;
-  max-width: none;
-  object-fit: cover;
-  transform: translate(-50%, -50%);
-  transition: width 0.4s ease, height 0.4s ease;
-}
-
-.nav__logo:hover .nav__logo-img {
-  width: 136%;
-  height: 136%;
-}
-
-/* Text stack */
-.nav__logo-labels {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.nav__logo-text {
-  font-family: var(--font-serif);
-  font-size: 1.3rem;
-  font-weight: 600;
-  color: var(--gold);
-  letter-spacing: 0.04em;
-  transition: color var(--transition);
-}
-
-.nav__logo-sub {
-  font-size: 0.58rem;
-  font-weight: 500;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-}
-
-.nav__logo:hover .nav__logo-text {
-  color: var(--gold-light);
+.nav__logo:hover .nav__logo-wordmark {
+  opacity: 0.85;
 }
 
 /* ─── Links ──────────────────────────────────────────────────────────── */
@@ -230,14 +176,7 @@
       var(--surface);
   }
 
-  .nav__logo-img-wrap {
-    width: 38px;
-    height: 38px;
-  }
-
-  .nav__logo-text { font-size: 1.1rem; }
-
-  .nav__logo-sub { display: none; }
+  .nav__logo-wordmark { height: 22px; }
 
   .nav__links {
     position: fixed;
