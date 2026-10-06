@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import type { SpectacolDb } from '../../types/db';
-import { categoryInfo, formatDate } from '../../lib/showFormat';
+import { categoryInfo, formatDate, daysUntil, daysUntilLabel } from '../../lib/showFormat';
 import ImageLightbox from '../ImageLightbox/ImageLightbox';
 import './UpcomingShowCard.css';
 
@@ -45,6 +45,10 @@ export default function UpcomingShowCard({ show }: Props) {
           <div className="upcoming-card__meta-item">
             <LocationIcon />
             <span>{show.locatie}</span>
+          </div>
+          <div className="upcoming-card__meta-item upcoming-card__countdown">
+            <ClockIcon />
+            <span>{daysUntilLabel(daysUntil(show.data))}</span>
           </div>
         </div>
 
@@ -91,6 +95,15 @@ function LocationIcon() {
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
       <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
       <circle cx="12" cy="10" r="3" />
+    </svg>
+  );
+}
+
+function ClockIcon() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="9" />
+      <polyline points="12 7 12 12 16 14" />
     </svg>
   );
 }

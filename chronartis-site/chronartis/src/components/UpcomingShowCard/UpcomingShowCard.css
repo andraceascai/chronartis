@@ -97,6 +97,13 @@
 
 .upcoming-card__meta-item svg { color: var(--gold); flex-shrink: 0; }
 
+/* Numărătoarea inversă iese puțin în evidență față de restul rândurilor
+   (dată, locație) — auriu și îngroșat, nu doar text neutru. */
+.upcoming-card__countdown {
+  color: var(--gold-light);
+  font-weight: 600;
+}
+
 /* ─── Description ────────────────────────────────────────────────────── */
 .upcoming-card__description {
   font-size: 0.88rem;

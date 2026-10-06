@@ -52,7 +52,7 @@ export default function Home() {
           </h1>
           <div className="gold-divider gold-divider--wide fade-in-3" />
           <p className="hero__subtitle fade-in-3">
-            Creăm experiențe culturale extraordinare: concerte,
+            Creăm experiențe culturale unice: concerte,
             <br />
             teatru și spectacole, pentru publicul care caută excepționalul.
           </p>
@@ -230,13 +230,13 @@ const PILLARS = [
     icon: "♪",
     title: "Excelență Artistică",
     description:
-      "Colaborăm exclusiv cu artiști și ansambluri de elită, transformând fiecare apariție într-o experiență culturală memorabilă.",
+      "Colaborăm exclusiv cu artiști și ansambluri de prestigiu, transformând fiecare apariție într-o experiență culturală memorabilă.",
   },
   {
     icon: "◇",
     title: "Acoperire Culturală",
     description:
-      "DDe la marile scene ale capitalei până în orașele din întreaga țară, aducem cultura de înaltă clasă mai aproape de fiecare generație.",
+      "De la marile scene ale capitalei până în orașele din întreaga țară, aducem cultura de înaltă clasă mai aproape de fiecare generație.",
   },
   {
     icon: "❧",

@@ -45,7 +45,7 @@ export default function UpcomingShows() {
       <main className="page-wrapper upcoming-shows">
         <div className="container">
           <header className="upcoming-shows__header">
-            <p className="gold-label">Sezonul 2025</p>
+            <p className="gold-label">Sezonul 2026 - 2027</p>
             <div className="gold-divider" />
             <h1 className="page-title">Spectacole Viitoare</h1>
             <p className="upcoming-shows__subtitle">

@@ -27,3 +27,20 @@ const CATEGORY_MAP: Record<string, { key: CategoryKey; label: string }> = {
 export function categoryInfo(categorie: string) {
   return CATEGORY_MAP[categorie?.toLowerCase()] ?? { key: 'other' as const, label: categorie };
 }
+
+// Câte zile calendaristice mai sunt până la spectacol (0 = azi, negativ = a
+// trecut deja). Ignoră ora zilei, ca să nu sară cu o zi în funcție de
+// momentul din zi la care se încarcă pagina.
+export function daysUntil(dateString: string): number {
+  const target = new Date(dateString);
+  target.setHours(0, 0, 0, 0);
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  return Math.round((target.getTime() - today.getTime()) / 86_400_000);
+}
+
+export function daysUntilLabel(days: number): string {
+  if (days <= 0) return 'Astăzi';
+  if (days === 1) return '1 zi rămasă';
+  return `${days} zile rămase`;
+}
