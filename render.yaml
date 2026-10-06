@@ -1,0 +1,42 @@
+services:
+  # --- Backend: Express + MongoDB -----------------------------------------
+  - name: chronartis-backend
+    type: web
+    runtime: node
+    rootDir: chronartis-site/backend
+    buildCommand: npm install
+    startCommand: npm start
+    autoDeployTrigger: commit
+    envVars:
+      # Secret — Render te întreabă valoarea la crearea Blueprint-ului,
+      # nu stă niciodată scrisă în acest fișier.
+      - key: MONGODB_URI
+        sync: false
+      - key: DB_NAME
+        value: site
+      # PORT nu se declară — Render îl setează singur, iar server.js
+      # citește deja process.env.PORT.
+
+  # --- Frontend: React + Vite, site static --------------------------------
+  - name: chronartis-frontend
+    type: web
+    runtime: static
+    rootDir: chronartis-site/chronartis
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    autoDeployTrigger: commit
+    envVars:
+      # Presupune că backend-ul se numește exact "chronartis-backend" mai
+      # sus — Render îi dă atunci adresa https://chronartis-backend.onrender.com.
+      # Dacă Render a trebuit să aleagă alt nume (ex. numele era deja luat),
+      # actualizează valoarea asta din dashboard și dă redeploy manual.
+      - key: VITE_API_URL
+        value: https://chronartis-backend.onrender.com/api
+    routes:
+      # Esențial pentru React Router: fără asta, refresh sau acces direct
+      # pe orice pagină în afară de "/" dă 404 (serverul caută un fișier
+      # care nu există). Cu rewrite, orice cale servește tot index.html,
+      # iar React Router preia rutarea în browser.
+      - type: rewrite
+        source: /*
+        destination: /index.html
