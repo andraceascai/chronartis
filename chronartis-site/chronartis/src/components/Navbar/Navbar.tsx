@@ -21,6 +21,10 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
+    // Resetare simplă la navigare (închide meniul mobil) — nu există o
+    // alternativă mai curată fără să remontăm tot header-ul la fiecare
+    // schimbare de rută, ceea ce ar reseta inutil și restul stării lui.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMenuOpen(false);
   }, [location]);
 

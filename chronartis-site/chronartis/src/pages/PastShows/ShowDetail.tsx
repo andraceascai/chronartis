@@ -16,8 +16,6 @@ export default function ShowDetail() {
 
   useEffect(() => {
     let cancelled = false;
-    setStatus('loading');
-    setShow(null);
 
     api
       .get<ArhivaDb>(`/arhiva/${showId}`)

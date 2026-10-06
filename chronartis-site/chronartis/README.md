@@ -1,73 +1,42 @@
-# React + TypeScript + Vite
+# Chronartis — Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Site-ul public al Asociației Chronartis — React + TypeScript + Vite.
 
-Currently, two official plugins are available:
+## Pornire locală
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
+cp .env.example .env   # VITE_API_URL=http://localhost:3000/api
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Are nevoie de backend-ul pornit în paralel (vezi [../backend/README.md](../backend/README.md)) — fără el, paginile se încarcă dar rămân fără conținut (spectacole, sponsori etc.), fiindcă nu există date mock în frontend.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Variabile de mediu
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+| Variabilă       | Descriere                                                        |
+| --------------- | ------------------------------------------------------------------ |
+| `VITE_API_URL`  | Adresa backend-ului (local: `http://localhost:3000/api`; în producție: URL-ul public al serviciului de backend + `/api`) |
+
+## Scripturi
+
+```bash
+npm run dev       # server de dezvoltare, cu hot reload
+npm run build     # verifică tipurile și produce build-ul de producție în dist/
+npm run preview   # servește local build-ul din dist/, ca să-l testezi înainte de deploy
+npm run lint      # ESLint
 ```
+
+## Structură
+
+```
+src/
+├── components/   — componente reutilizabile (carduri, galerie, navbar, lightbox...)
+├── pages/        — o pagină pe rută (Acasă, Arhivă, Evenimente, Donează)
+├── lib/          — client axios (api.ts) și ajutoare de formatare (showFormat.ts)
+├── types/        — tipuri TypeScript; types/db.ts oglindește exact formele din backend
+└── data/         — doar linkurile de social media (singurul conținut static rămas)
+```
+
+Toate datele reale (spectacole, arhivă, sponsori, statistici) vin din API,
+prin `src/lib/api.ts` — nu există date mock pentru conținut.
