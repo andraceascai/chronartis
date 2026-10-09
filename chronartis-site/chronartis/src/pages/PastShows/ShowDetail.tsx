@@ -35,7 +35,7 @@ export default function ShowDetail() {
     };
   }, [showId]);
 
-  if (status === 'error') return <Navigate to="/archive" replace />;
+  if (status === 'error') return <Navigate to="/arhiva" replace />;
   if (!show) return null;
 
   const gallery = show.galerie.map((item, idx) => ({
@@ -66,7 +66,7 @@ export default function ShowDetail() {
         <div className="container show-detail__body">
 
           {/* ─── Back Link ─────────────────────────────────────────── */}
-          <Link to="/archive" className="show-detail__back">
+          <Link to="/arhiva" className="show-detail__back">
             ← Înapoi la Arhivă
           </Link>
 

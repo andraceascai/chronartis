@@ -57,10 +57,10 @@ export default function Home() {
             teatru și spectacole, pentru publicul care caută excepționalul.
           </p>
           <div className="hero__actions fade-in-3">
-            <a href="/upcoming" className="btn-gold btn-gold-filled">
+            <a href="/evenimente" className="btn-gold btn-gold-filled">
               Ce urmează
             </a>
-            <a href="/archive" className="btn-gold">
+            <a href="/arhiva" className="btn-gold">
               Evenimente trecute
             </a>
           </div>
@@ -173,7 +173,7 @@ export default function Home() {
               </p>
             </div>
             <Link
-              to="/donate#redirectionare"
+              to="/doneaza#redirectionare"
               className="btn-gold btn-gold-filled support__cta"
             >
               Redirecționează 3,5%

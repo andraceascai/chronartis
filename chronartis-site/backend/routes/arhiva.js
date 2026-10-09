@@ -18,14 +18,16 @@ router.get('/arhiva', async (req, res) => {
 router.get('/arhiva/:showId', async (req, res) => {
   try {
     const { showId } = req.params;
-    // _id poate fi un string (ex. "requiem-mozart") sau un ObjectId generat
-    // de Mongo — încercăm ambele variante, ca să meargă indiferent cum a
-    // fost creat documentul.
+    // Căutăm întâi după slug-ul "id" (ex. "oscar-si-tanti-roz-iasi-2026",
+    // cel din URL). Pentru documentele vechi, fără slug completat încă,
+    // păstrăm și căutarea după _id (string sau ObjectId) ca rezervă.
     const candidates = [showId];
     if (/^[0-9a-fA-F]{24}$/.test(showId)) {
       candidates.push(new mongoose.Types.ObjectId(showId));
     }
-    const show = await Arhiva.findOne({ _id: { $in: candidates } });
+    const show = await Arhiva.findOne({
+      $or: [{ id: showId }, { _id: { $in: candidates } }],
+    });
 
     if (!show) {
       return res.status(404).json({ message: 'Spectacolul nu a fost găsit' });

@@ -8,8 +8,12 @@ interface Props {
 }
 
 export default function ShowCard({ show }: Props) {
+  // Preferăm slug-ul scris de mână ("id") — dacă lipsește (documente mai
+  // vechi, necompletate încă), rămâne _id-ul din Mongo ca rezervă.
+  const slug = show.id || show._id;
+
   return (
-    <Link to={`/archive/${show._id}`} className="show-card" aria-label={`Vezi detalii pentru ${show.titlu}`}>
+    <Link to={`/arhiva/${slug}`} className="show-card" aria-label={`Vezi detalii pentru ${show.titlu}`}>
       <div className="show-card__image-wrap">
         <img src={show.afis} alt={show.titlu} className="show-card__image" loading="lazy" />
         <span className="show-card__category gold-label">{categoryInfo(show.categorie).label}</span>

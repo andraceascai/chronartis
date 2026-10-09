@@ -44,6 +44,10 @@ export interface GalerieItemDb {
 
 export interface ArhivaDb {
   _id: string;
+  // Slug scris de mână în Mongo (ex. "oscar-si-tanti-roz-iasi-2026") — ăsta
+  // apare în URL, nu _id-ul generat de Mongo. Opțional, ca documentele mai
+  // vechi, fără slug completat încă, să nu rupă tipul.
+  id?: string;
   titlu: string;
   categorie: string;
   afis: string;

@@ -4,9 +4,9 @@ import "./Navbar.css";
 
 const NAV_ITEMS = [
   { label: "Acasă", path: "/" },
-  { label: "Arhivă", path: "/archive" },
-  { label: "Evenimente", path: "/upcoming" },
-  { label: "Donează", path: "/donate" },
+  { label: "Arhivă", path: "/arhiva" },
+  { label: "Evenimente", path: "/evenimente" },
+  { label: "Donează", path: "/doneaza" },
 ] as const;
 
 export default function Navbar() {
@@ -47,7 +47,7 @@ export default function Navbar() {
               to={path}
               end={path === "/"}
               className={({ isActive }) =>
-                `nav__link ${isActive ? "nav__link--active" : ""} ${path === "/donate" ? "nav__link--cta" : ""}`
+                `nav__link ${isActive ? "nav__link--active" : ""} ${path === "/doneaza" ? "nav__link--cta" : ""}`
               }
             >
               {label}
