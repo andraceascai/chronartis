@@ -191,21 +191,25 @@ export default function Home() {
             <h2 className="section-title">Să rămânem conectați</h2>
           </div>
           <div className="social__links">
-            {socialLinks.map((link) => (
-              <a
-                key={link.platform}
-                href={link.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="social__link"
-                aria-label={`Urmărește-ne pe ${link.platform}`}
-              >
-                <span className="social__icon" aria-hidden="true">
-                  {SOCIAL_ICONS[link.platform] ?? "◈"}
-                </span>
-                <span className="social__platform">{link.platform}</span>
-              </a>
-            ))}
+            {socialLinks.map((link) => {
+              const isEmail = link.url.startsWith("mailto:");
+              return (
+                <a
+                  key={link.platform}
+                  href={link.url}
+                  // mailto: nu se deschide într-un tab — target="_blank" ar
+                  // putea lăsa un tab gol după ce pornește aplicația de mail.
+                  {...(!isEmail && { target: "_blank", rel: "noopener noreferrer" })}
+                  className="social__link"
+                  aria-label={isEmail ? `Scrie-ne pe ${link.url.replace("mailto:", "")}` : `Urmărește-ne pe ${link.platform}`}
+                >
+                  <span className="social__icon" aria-hidden="true">
+                    {SOCIAL_ICONS[link.platform] ?? "◈"}
+                  </span>
+                  <span className="social__platform">{link.platform}</span>
+                </a>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -251,4 +255,5 @@ const SOCIAL_ICONS: Record<string, string> = {
   Facebook: "◉",
   YouTube: "▶",
   LinkedIn: "◆",
+  Email: "✉",
 };
