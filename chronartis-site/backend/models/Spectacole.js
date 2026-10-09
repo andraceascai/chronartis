@@ -1,7 +1,9 @@
 const mongoose = require('mongoose');
 
 const spectacoleSchema = new mongoose.Schema({
-  _id: String,
+  // Mixed, nu String — vezi models/Arhiva.js pentru motiv (colecția poate
+  // avea atât _id text, cât și ObjectId generat automat de Mongo).
+  _id: mongoose.Schema.Types.Mixed,
   titlu: String,
   categorie: String,        // 'concert' | 'theater' | 'eveniment' | 'other'
   afis: String,

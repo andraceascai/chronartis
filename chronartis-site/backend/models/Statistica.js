@@ -4,7 +4,8 @@ const mongoose = require('mongoose');
 // actualiza un număr, e suficient să editezi documentul din colecția
 // "statistici" — nu trebuie atins codul.
 const statisticaSchema = new mongoose.Schema({
-  _id: String,
+  // Mixed, nu String — vezi models/Arhiva.js pentru motiv.
+  _id: mongoose.Schema.Types.Mixed,
   eticheta: String,    // ex. "Vârstnici"
   valoare: Number,     // ex. 500
   inCrestere: Boolean, // afișează bagheta "în creștere" lângă cifră
